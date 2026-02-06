@@ -6,7 +6,7 @@ This technical note analyses memoryâ€‘usage patterns of `pipetask` during largeâ
 
 ```
 
-# Technical Note: Comparison of Three Campaigns with Different Software Stack Releases
+# Characterizing Memory Requirements for Large-Scale LSSTCam Productions at FrDF
 
 ## Introduction
 
