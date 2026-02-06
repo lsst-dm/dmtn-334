@@ -257,25 +257,7 @@ The dashed red line indicates the 6GB limit.
 
 ## 4. Conclusion
 
-The analysis demonstrates that reducing memory allocation to 6 GB per core is feasible for the majority of pipetasks across all stages. Less than 0.3% of quanta exceed the 6 GB limit, with only a few pipetasks consistently requiring more memory. These findings suggest that:
-
-* Stage 1: 6 GB/core is sufficient for 99.993% of quanta.
-* Stage 2: 6 GB/core is sufficient for 99.7% of quanta.
-* Stage 3: 6 GB/core is sufficient for 99.85% of quanta.
-* Stage 4: 6 GB/core is sufficient for 99.997% of quanta.
-
-
-
-```{rst-class} technote-wide-content
-```
-
-| Stage | Quanta | N. quanta > 6GB | % quanta > 6GB| 
-|-------|--------|---------------|--------------|
-| Stage 1 | 574472 | 40 | 0.007 |
-| Stage 2 | 565778 | 1706 | 0.3 |
-| Stage 3 |1308272 | 1979 | 0.15| 
-|Stage 4| 2321953| 72 | 0.003 | 
-
+The analysis demonstrates that reducing memory allocation to 6 GB per core is feasible for the majority of pipetasks across all stages. Less than 0.3% of quanta exceed the 6 GB limit, with only a few pipetasks consistently requiring more memory. 
 The cumulative plot in the next Figures illustrates the fraction of pipetasks that use up to a given amount of memory (Max RSS). This allows us to evaluate how many pipetasks exceed the critical 6 GB threshold and identify the percentile at which most tasks operate below this limit.
 
 As shown, 99.9% of pipetasks in Stage 1 use less than 6 GB of memory (Figure 6). Only 0.3% exceed this threshold, indicating that reducing memory allocation to 6 GB per core is feasible for the majority of operations. The green dashed line represents the 95th percentile, which is approximately 3 GB.
@@ -308,3 +290,22 @@ Cumulative fraction of Stage 4 quanta per Max RSS. The green dashed line represe
 ```
 
 The cumulative plots confirm that reducing memory allocation to 6 GB per core would suffice for over 99% of pipetasks across all stages.
+
+These findings suggest that:
+
+* Stage 1: 6 GB/core is sufficient for 99.993% of quanta.
+* Stage 2: 6 GB/core is sufficient for 99.7% of quanta.
+* Stage 3: 6 GB/core is sufficient for 99.85% of quanta.
+* Stage 4: 6 GB/core is sufficient for 99.997% of quanta.
+
+
+
+```{rst-class} technote-wide-content
+```
+
+| Stage | Quanta | N. quanta > 6GB | % quanta > 6GB| 
+|-------|--------|---------------|--------------|
+| Stage 1 | 574472 | 40 | 0.007 |
+| Stage 2 | 565778 | 1706 | 0.3 |
+| Stage 3 |1308272 | 1979 | 0.15| 
+|Stage 4| 2321953| 72 | 0.003 | 
