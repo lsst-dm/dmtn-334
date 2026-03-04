@@ -235,60 +235,63 @@ Summary of RSS usage for each pipetask in Stage 3 is reported in the next table.
 ```
 |                                           |   max_rss_mean |   max_rss_median |   max_rss_min |   max_rss_max |   max_rss_95th_percentile |
 |:------------------------------------------|---------------:|-----------------:|--------------:|--------------:|--------------------------:|
-| fitDeblendedObjectsSersic                 |       3.5115   |         3.19182  |      2.57327  |      5.64964  |                  5.35403  |
-| makeDirectWarp                            |       3.34818  |         3.46574  |      0.703133 |      5.43504  |                  3.51613  |
-| photometricRefCatObjectTract              |       2.57652  |         2.57644  |      2.57299  |      2.58017  |                  2.5795   |
-| makeBinnedTemplateNImage                  |       2.57557  |         2.57561  |      2.57146  |      2.57888  |                  2.57772  |
-| makeBinnedDeepNImage                      |       2.57558  |         2.5756   |      2.57146  |      2.57888  |                  2.57776  |
-| fitDeblendedObjectsExp                    |       3.50459  |         3.19024  |      2.57222  |      5.6279   |                  5.33519  |
-| makeMetricTableObjectParentTableCore      |       0.484478 |         0.484478 |      0.484478 |      0.484478 |                  0.484478 |
-| analyzeObjectParentTableCore              |       2.57617  |         2.57603  |      2.57316  |      2.57922  |                  2.57856  |
-| rewriteObject                             |       3.32331  |         2.58011  |      2.57263  |      5.4544   |                  5.13301  |
-| photometricCatalogMatch                   |       2.62549  |         2.57809  |      2.57417  |      2.94667  |                  2.80002  |
-| deconvolve                                |       2.69556  |         2.71182  |      2.57164  |      2.7452   |                  2.72419  |
-| detectCoaddPeaks                          |       3.81364  |         4.16212  |      0.600506 |      4.61034  |                  4.33248  |
-| assembleDeepCoadd                         |       2.41916  |         2.54317  |      0.600018 |      3.32837  |                  2.96232  |
-| makeWholeTractTemplateNImage              |       2.57576  |         2.57576  |      2.572    |      2.57922  |                  2.57817  |
-| analyzeObjectTableSurveyCore              |       3.51176  |         3.51176  |      3.51176  |      3.51176  |                  3.51176  |
-| makeMetricTableObjectTableCore            |       0.499382 |         0.499382 |      0.499382 |      0.499382 |                  0.499382 |
-| objectTableCoreRefCatMatchWholeSkyPlot    |       1.15847  |         1.15847  |      1.15847  |      1.15847  |                  1.15847  |
-| makeDeepCoaddInputSummary                 |       0.611153 |         0.611153 |      0.611153 |      0.611153 |                  0.611153 |
-| consolidateHealSparsePropertyMaps         |       1.15104  |         1.20105  |      0.847549 |      1.25912  |                  1.25531  |
-| makeDeepCoaddInputSummaryTract            |       3.94297  |         2.57801  |      2.57249  |     18.8658   |                 10.1533   |
-| assembleCellCoadd                         |       3.80855  |         4.15405  |      0.600018 |      4.61034  |                  4.32526  |
-| analyzeObjectTableCore                    |       3.3383   |         3.14916  |      2.57492  |      5.05402  |                  4.73978  |
-| makeWholeTractImage                       |       2.57575  |         2.57572  |      2.572    |      2.57922  |                  2.57815  |
-| makeBinnedCoaddImage                      |       2.57558  |         2.5756   |      2.57146  |      2.57888  |                  2.57776  |
-| deblendCoaddFootprints                    |       5.17529  |         5.95815  |      2.92616  |      8.50922  |                  7.42517  |
-| mergeObjectDetection                      |       2.57567  |         2.57562  |      2.56172  |      2.58175  |                  2.57795  |
-| plotPropertyMapTract                      |       5.73027  |         5.73246  |      5.39004  |      6.06255  |                  5.97371  |
-| plotPropertyMapSurvey                     |       5.05564  |         5.35671  |      3.10338  |      5.80174  |                  5.77431  |
-| makePsfMatchedWarp                        |       3.40902  |         3.48077  |      0.703133 |      5.43504  |                  3.64697  |
-| objectTableCoreWholeSkyPlot               |       2.65966  |         2.65966  |      2.65966  |      2.65966  |                  2.65966  |
-| mergeObjectMeasurement                    |       2.57583  |         2.57578  |      2.56742  |      2.57996  |                  2.57825  |
-| catalogMatchTract                         |       2.62423  |         2.57871  |      2.57301  |      2.85443  |                  2.79567  |
-| objectParentTableCoreWholeSkyPlot         |       0.587029 |         0.587029 |      0.587029 |      0.587029 |                  0.587029 |
-| computeObjectEpochs                       |       3.32331  |         2.58011  |      2.57263  |      5.4544   |                  5.13301  |
-| assembleTemplateCoadd                     |       2.42056  |         2.54411  |      0.600018 |      3.32837  |                  2.96232  |
-| fitDeepCoaddPsfGaussians                  |       2.57583  |         2.57578  |      2.56709  |      2.58027  |                  2.5782   |
-| measureObjectUnforced                     |       2.57774  |         2.57594  |      2.56763  |      2.67136  |                  2.58994  |
-| makeTemplateCoaddInputSummary             |       0.542938 |         0.542938 |      0.542938 |      0.542938 |                  0.542938 |
-| selectDeepCoaddVisits                     |       0.654651 |         0.65484  |      0.592125 |      0.69635  |                  0.688838 |
-| refCatObjectTract                         |       2.57628  |         2.57619  |      2.57102  |      2.57982  |                  2.57877  |
-| standardizeObject                         |       3.32331  |         2.58011  |      2.57263  |      5.4544   |                  5.13301  |
-| selectTemplateCoaddVisits                 |       0.655376 |         0.656397 |      0.59359  |      0.69635  |                  0.689296 |
-| makeWholeTractDeepNImage                  |       2.57575  |         2.57571  |      2.572    |      2.57922  |                  2.57815  |
-| makeTemplateCoaddInputSummaryTract        |       2.65578  |         2.57598  |      2.57053  |      3.40516  |                  3.13109  |
-| consolidateParentTable                    |       2.57589  |         2.57587  |      2.56947  |      2.57968  |                  2.57873  |
-| splitPrimaryObject                        |       6.89114  |         4.26217  |      2.57795  |     18.192    |                 16.0149   |
-| measureObjectForced                       |       2.57597  |         2.57594  |      2.56752  |      2.64236  |                  2.57837  |
-| makeMetricTableObjectTableCoreRefCatMatch |       0.489761 |         0.489761 |      0.489761 |      0.489761 |                  0.489761 |
-| validateObjectTableCore                   |       2.57574  |         2.57585  |      2.57043  |      2.57975  |                  2.57838  |
-| makeHealSparsePropertyMaps                |       5.52649  |         4.38968  |      2.57258  |     14.1133   |                 13.7368   |
-| consolidateObject                         |       3.82746  |         2.76657  |      2.5733   |      7.85451  |                  6.71066  |
+| selectTemplateCoaddVisits                 |       0.65371  |         0.652361 |      0.595356 |      0.688534 |                  0.684475 |
+| splitPrimaryObject                        |       4.38222  |         1.9906   |      0.63155  |     17.4722   |                 13.1409   |
+| fitDeepCoaddPsfGaussians                  |       1.0076   |         1.04602  |      0.621536 |      1.09909  |                  1.08942  |
+| metadetectionShear                        |       1.67526  |         1.742    |      0.706963 |      1.84409  |                  1.83381  |
+| assembleTemplateCoadd                     |       2.37399  |         2.45605  |      0.598366 |      2.90918  |                  2.73577  |
+| consolidateParentTable                    |       0.768712 |         0.679214 |      0.625923 |      1.1706   |                  1.08776  |
+| mergeObjectMeasurement                    |       0.6944   |         0.633909 |      0.620609 |      0.863731 |                  0.845725 |
+| plotPropertyMapTract                      |       4.69683  |         4.70322  |      4.41187  |      5.04356  |                  4.92766  |
+| fitDeblendedObjectsSersic                 |       2.12916  |         1.34765  |      0.822514 |      4.61545  |                  4.37458  |
+| refCatObjectTract                         |       0.921133 |         0.888134 |      0.798336 |      1.08419  |                  1.07457  |
+| makePsfMatchedWarp                        |       3.39722  |         3.42105  |      0.617081 |      3.8084   |                  3.57501  |
+| catalogMatchTract                         |       0.870329 |         0.729294 |      0.649548 |      1.50202  |                  1.33685  |
+| plotPropertyMapSurvey                     |       4.1602   |         4.25547  |      3.05684  |      4.82431  |                  4.79948  |
+| makeMetricTableObjectParentTableCore      |       0.490383 |         0.490383 |      0.490383 |      0.490383 |                  0.490383 |
+| makeBinnedCoaddImage                      |       0.740526 |         0.740738 |      0.706959 |      0.755222 |                  0.751319 |
+| selectDeepCoaddVisits                     |       0.653076 |         0.651211 |      0.595356 |      0.688534 |                  0.684441 |
+| measureObjectForced                       |       1.2724   |         1.31315  |      0.620621 |      1.68477  |                  1.59369  |
+| detectCoaddPeaks                          |       4.04251  |         4.19313  |      0.598366 |      4.70403  |                  4.49203  |
+| makeDirectWarp                            |       3.34297  |         3.40371  |      0.617081 |      3.8084   |                  3.44984  |
+| consolidateObject                         |       2.04476  |         1.18666  |      0.63308  |      6.5104   |                  5.16442  |
+| mergeObjectDetection                      |       0.658362 |         0.651159 |      0.541325 |      0.686981 |                  0.682064 |
+| makeWholeTractImage                       |       0.767424 |         0.759033 |      0.675655 |      0.895149 |                  0.874706 |
+| makeWholeTractTemplateNImage              |       0.804325 |         0.799746 |      0.695847 |      0.925613 |                  0.922905 |
+| photometricRefCatObjectTract              |       0.916859 |         0.882507 |      0.788025 |      1.08813  |                  1.04813  |
+| consolidateShearObject                    |       0.899483 |         0.801559 |      0.624893 |      1.45676  |                  1.26816  |
+| validateObjectTableCore                   |       0.701319 |         0.640598 |      0.621323 |      0.916172 |                  0.882812 |
+| objectParentTableCoreWholeSkyPlot         |       0.586369 |         0.586369 |      0.586369 |      0.586369 |                  0.586369 |
+| makeHealSparsePropertyMaps                |       5.72563  |         4.59602  |      1.01052  |     17.6435   |                 14.9179   |
+| makeBinnedDeepNImage                      |       0.743317 |         0.744091 |      0.621178 |      0.755222 |                  0.752476 |
+| analyzeObjectTableSurveyCore              |       2.06782  |         2.06782  |      2.06782  |      2.06782  |                  2.06782  |
+| assembleCellCoadd                         |       4.03475  |         4.18464  |      0.598366 |      4.60523  |                  4.48033  |
+| deblendCoaddFootprints                    |       3.7279   |         2.79314  |      1.79509  |      6.90266  |                  6.37775  |
+| photometricCatalogMatch                   |       0.864245 |         0.754807 |      0.647858 |      1.44056  |                  1.28093  |
+| analyzeObjectTableCore                    |       2.0096   |         1.48076  |      1.04328  |      4.32022  |                  3.62084  |
+| analyzeObjectParentTableCore              |       0.661792 |         0.62991  |      0.623722 |      0.764782 |                  0.759708 |
+| consolidateHealSparsePropertyMaps         |       1.00861  |         1.01416  |      0.85503  |      1.11505  |                  1.11164  |
+| makeMetricTableObjectTableCoreRefCatMatch |       0.488861 |         0.488861 |      0.488861 |      0.488861 |                  0.488861 |
+| makeMetricTableObjectTableCore            |       0.494553 |         0.494553 |      0.494553 |      0.494553 |                  0.494553 |
+| makeDeepCoaddInputSummary                 |       0.592121 |         0.592121 |      0.592121 |      0.592121 |                  0.592121 |
+| computeObjectEpochs                       |       1.76113  |         0.852695 |      0.674358 |      4.414    |                  4.12537  |
+| assembleDeepCoadd                         |       2.36339  |         2.44578  |      0.598366 |      2.84563  |                  2.72003  |
+| objectTableCoreWholeSkyPlot               |       2.64798  |         2.64798  |      2.64798  |      2.64798  |                  2.64798  |
+| objectTableCoreRefCatMatchWholeSkyPlot    |       1.15347  |         1.15347  |      1.15347  |      1.15347  |                  1.15347  |
+| makeTemplateCoaddInputSummaryTract        |       1.51558  |         0.98008  |      0.664383 |      6.76672  |                  3.8465   |
+| makeDeepCoaddInputSummaryTract            |       2.95651  |         0.954704 |      0.665157 |     17.955    |                 10.5732   |
+| makeWholeTractDeepNImage                  |       0.653418 |         0.6502   |      0.621967 |      0.688782 |                  0.687188 |
+| rewriteObject                             |       1.74653  |         0.852695 |      0.624527 |      4.414    |                  4.12537  |
+| deconvolve                                |       1.53463  |         1.59141  |      0.817303 |      1.63986  |                  1.62381  |
+| makeTemplateCoaddInputSummary             |       0.533478 |         0.533478 |      0.533478 |      0.533478 |                  0.533478 |
+| standardizeObject                         |       1.83685  |         0.929029 |      0.836823 |      4.414    |                  4.12537  |
+| measureObjectUnforced                     |       1.39125  |         1.4261   |      0.775192 |      1.72871  |                  1.64419  |
+| makeBinnedTemplateNImage                  |       0.743883 |         0.744183 |      0.709461 |      0.755222 |                  0.752476 |
+| fitDeblendedObjectsExp                    |       2.12206  |         1.3449   |      0.821854 |      4.60065  |                  4.3463   |
 
 
-The next two charts show the RSS distribution in 1 GB increments for all quanta processed during Stage 3. A total of 1,308,272 quanta were processed, with 1,979 (around 0.15%) exceeding the 6 GB threshold.  
+
+The next two charts show the RSS distribution in 1 GB increments for all quanta processed during Stage 3. A total of 887,683 quanta were processed, with 637  (around 0.07%) exceeding the 6 GB threshold.  
 
 ```{figure} ./images/MaxRSS_distro_per_task_v30_stage3.png
 :figclass: technote-wide-content
@@ -305,21 +308,21 @@ Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage�
 
 The next two charts, showing integrated wall time per RSS range, further confirms that 6 GB per core is generally sufficient for almost all Stage 3 pipeline tasks but the `gaussianProcessesTurbulenceFit` pipetask consistently utilizes around 6 GB of memory for extended periods.
 
-If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will mobilize some cores for ~249  hours compared (~0.15%) to ~38,637 hours total walltime. 
+If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will mobilize some cores for ~124  hours compared (~0.5%) to ~25,973 hours total walltime. 
 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_stage3.png
 :figclass: technote-wide-content
 
 Integrated walltime per RSS range for Stage 3 processes.
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of ~249 hours of walltime compared to the 38,637hours of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of ~124 hours of walltime compared to the 25,973 hours of total walltime.
 ```
 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage3.png
 :figclass: technote-wide-content
 Integrated walltime per RSS range for Stage 3 processes depassing 6GB.
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of ~249 hours of walltime compared to the 38,637 hours of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of ~124 hours of walltime compared to the 25,973 hours of total walltime.
 ```
 
 
@@ -462,10 +465,10 @@ The following table presents the number of quanta exceeding the GB threshold for
 ```
 | Stage | Quanta | N. quanta > 6GB | % quanta > 6GB | Walltime (h) > 6GB |  % walltime > 6GB | Total Walltime| 
 |-------|--------|---------------|--------------|--------------| --------------| --------------|
-| Stage 1 | 574,472 | 36 | 0.006 | 3.3  | 0.3 | 10045 |
-| Stage 2 | 567,886 | 1916 | 0.3 | 2077 | 25| 8267 |
-| Stage 3 |1,308,272 | 1,979 | 0.15| 249 | 0.15 |8267 | 
-|Stage 4| 3,408,460 | 1,137 | 0.04 | 2,893 | 4 | 8267 |
+| Stage 1 | 574,472 | 36 | 0.006 | 3.3  | 0.3 | 10,045 |
+| Stage 2 | 567,886 | 1916 | 0.3 | 2077 | 25| 8,267 |
+| Stage 3 |1,308,272 | 1,979 | 0.15| 124 | 0.5 |25,973 | 
+|Stage 4| 3,408,460 | 1,137 | 0.04 | 2,894 | 4 | 73,137 |
 
 
 ## References
