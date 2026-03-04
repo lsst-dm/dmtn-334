@@ -63,6 +63,13 @@ Box plot showing maximum RSS for Stage 1 pipetasks in v30.0.4 release.
 Orange and red dashed lines indicate 4GB and 6GB memory thresholds. 
 Most tasks require <6GB RSS, except analyzeSingleVisitStarAssociation.
 ```
+
+```{figure} ./images/MaxRSS_stripplot_per_task_v30_upper6_stage1.png
+:figclass: technote-wide-content
+
+The plot displays number of runs (quanta) per Stage 1 pipetask that exceed the 6 GB memory threshold (dashed red line). Each diamond marks the frequency (or number of quanta) at which a given task reaches a specific memory level. 
+```
+
 The detailed view of RSS usage is summarized in the following table. 
 
 ```{rst-class} technote-wide-content
@@ -110,10 +117,10 @@ Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, re
 Tasks that exceed 6 GB of RSS account for a total of 3 hours of walltime compared to the 10,000 hours of total walltime.
 ```
 
-```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_stage1_log.png
+```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage1.png
 :figclass: technote-wide-content
 
-Integrated walltime per RSS range for Stage 1 processes with y-axes in logaritmic scale.
+Integrated walltime per RSS range for Stage 1 processes depassing 6GB. 
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
 Tasks that exceed 6 GB of RSS account for a total of 3 hours of walltime compared to the 10,000 hours of total walltime.
 ```
@@ -128,6 +135,14 @@ Even in Stage 2 the 6 GB threshold remains a useful reference, but two tasks
 Box plot showing maximum RSS for Stage 2 pipetasks in v30.0.4 release. 
 Orange and red dashed lines indicate 4GB and 6GB memory thresholds. 
 Most tasks require <6GB RSS but `analyzeRecalibratedStarAssociation` and `gbdesHealpix3AstrometricFit`.
+```
+
+How we can see in the above chart, differents tasks are using more than 6GB of RSS. The following charts visualize all the quanta using more than 6GB of memory grouped by pipetasks. Most of these cases involve the `analyzeRecalibratedStarAssociation` and `gaussianProcessesTurbulenceFit` pipetask.
+
+```{figure} ./images/MaxRSS_stripplot_per_task_v30_upper6_stage2.png
+:figclass: technote-wide-content
+
+The plot displays number of runs (quanta) per Stage 2 pipetask that exceed the 6 GB memory threshold (dashed red line). Each diamond marks the frequency (or number of quanta) at which a given task reaches a specific memory level. 
 ```
 
 More details are available in the next table. 
@@ -156,6 +171,7 @@ More details are available in the next table.
 | makeVisitDetectorTable                              |          1.0936   |         1.0936   |      1.0936   |      1.0936   |                  1.0936   | 
 
 
+
 The next two charts show the RSS distribution in 1 GB increments for all quanta processed during Stage 2. A total of 567,886 quanta were processed, with 1916 (around 0.3%) exceeding the 6 GB threshold. 
 
 ```{figure} ./images/MaxRSS_distro_per_task_v30_stage2.png
@@ -171,13 +187,7 @@ Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage�
 Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 2 run, with histogram bars grouped in 1 GB bins and the count on a logarithmic scale to improve the visualization. The green dashed line indicates the 95th percentile of the RSS values, showing that 95 % of the pipetasks fall at or below this level, while the red dashed line marks the 6 GB memory threshold; tasks that exceed this line may require further optimisation or additional resources. This plot highlights that the majority of pipetasks stay within the prescribed memory threshold, with only a small tail of outliers surpassing the 6 GB boundary.
 ```
 
-How we can see in the above chart, differents tasks are using more than 6GB of RSS. The following charts visualize all the quanta using more than 6GB of memory grouped by pipetasks. Most of these cases involve the `analyzeRecalibratedStarAssociation` and `gaussianProcessesTurbulenceFit` pipetask.
 
-```{figure} ./images/MaxRSS_stripplot_per_task_v30_upper6_stage2.png
-:figclass: technote-wide-content
-
-Number of runs (quanta) per pipetask that exceed the 6 GB memory threshold. 
-```
 
 The next two charts, showing integrated wall time per RSS range, further confirms that 6 GB per core is generally sufficient for almost all Stage 2 pipeline tasks but the `gaussianProcessesTurbulenceFit` pipetask consistently utilizes around 6 GB of memory for extended periods.
 
@@ -191,66 +201,125 @@ Tasks that exceed 6 GB of RSS account for a total of ~2,100 hours of wallt
 ```
 
 
-```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_stage2_log.png
+```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage2.png
 :figclass: technote-wide-content
 
-Integrated walltime per RSS range for Stage 2 processes with y-axes in logaritmic scale..
+Integrated walltime per RSS range for Stage 2 processes depassing 6GB.
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
 Tasks that exceed 6 GB of RSS account for a total of ~2,100 hours of walltime compared to the 8,300 hours of total walltime.
 ```
 
 ### Stage3
 
-For stage 3, there are significant differences between the software stack `w_2025_48` and `v30`. Consequently, a comparison becomes complicated. From now on, we no longer use the old stack in our analysis.
 
-In the following chart, we observe that memory usage becomes more critical in this stage compared to previous stages and the regression in memory usage between `v30.0.0.rc2` and `v30.0.0` is confirmed. 
+In the chart below, we see that memory usage becomes more critical at this stage: a larger number of quanta exceed the 6 GB limit compared with earlier stages. However, an analysis of the integrated walltime shows that the overall impact is negligible. 
 
-```{figure} ./images/MaxRSS_box_v30_stacks_stage3.png
+```{figure} ./images/MaxRSS_box_all_stacks_stage3.png
 :figclass: technote-wide-content
 
-Box Plot comparing the stage 3 pipetask max RSS. 
-The dashed red line show the 6GB threshold. 
+Box plot showing maximum RSS for Stage 3 pipetasks in v30.0.4 release. 
+Orange and red dashed lines indicate 4GB and 6GB memory thresholds. 
+Most tasks require < 6 GB RSS, but many quanta of `deblendCoaddFootprints`, `makeDeepCoaddInputSummaryTract`, and `makeHealSparsePropertyMaps` exceed this threshold. 
 ```
-We again focus on metrics from DM-53877 (`v30.0.0 rc3`). The next two charts show the RSS distribution in 1 GB increments for all quanta processed during Stage 3. A total of 1 308 272 quanta were processed, with 1979 (around 0.15%) exceeding the 6 GB threshold.  
+
+How we can see in the above chart, differents tasks are using more than 6GB of RSS. The following charts visualize all the quanta using more than 6GB of memory grouped by pipetask. We can see that the pipetask `deblendCoaddFootprint` and `makeHealSparsePropertyMaps` are the one exceeding more ofthen the 6GB threshold. 
+
+```{figure} ./images/MaxRSS_stripplot_per_task_v30_upper6_stage3.png
+:figclass: technote-wide-content
+
+The plot displays number of runs (quanta) per Stage 3 pipetask that exceed the 6 GB memory threshold (dashed red line). Each diamond marks the frequency (or number of quanta) at which a given task reaches a specific memory level. 
+```
+
+Summary of RSS usage for each pipetask in Stage 3 is reported in the next table. 
+```{rst-class} technote-wide-content
+```
+|                                           |   max_rss_mean |   max_rss_median |   max_rss_min |   max_rss_max |   max_rss_95th_percentile |
+|:------------------------------------------|---------------:|-----------------:|--------------:|--------------:|--------------------------:|
+| fitDeblendedObjectsSersic                 |       3.5115   |         3.19182  |      2.57327  |      5.64964  |                  5.35403  |
+| makeDirectWarp                            |       3.34818  |         3.46574  |      0.703133 |      5.43504  |                  3.51613  |
+| photometricRefCatObjectTract              |       2.57652  |         2.57644  |      2.57299  |      2.58017  |                  2.5795   |
+| makeBinnedTemplateNImage                  |       2.57557  |         2.57561  |      2.57146  |      2.57888  |                  2.57772  |
+| makeBinnedDeepNImage                      |       2.57558  |         2.5756   |      2.57146  |      2.57888  |                  2.57776  |
+| fitDeblendedObjectsExp                    |       3.50459  |         3.19024  |      2.57222  |      5.6279   |                  5.33519  |
+| makeMetricTableObjectParentTableCore      |       0.484478 |         0.484478 |      0.484478 |      0.484478 |                  0.484478 |
+| analyzeObjectParentTableCore              |       2.57617  |         2.57603  |      2.57316  |      2.57922  |                  2.57856  |
+| rewriteObject                             |       3.32331  |         2.58011  |      2.57263  |      5.4544   |                  5.13301  |
+| photometricCatalogMatch                   |       2.62549  |         2.57809  |      2.57417  |      2.94667  |                  2.80002  |
+| deconvolve                                |       2.69556  |         2.71182  |      2.57164  |      2.7452   |                  2.72419  |
+| detectCoaddPeaks                          |       3.81364  |         4.16212  |      0.600506 |      4.61034  |                  4.33248  |
+| assembleDeepCoadd                         |       2.41916  |         2.54317  |      0.600018 |      3.32837  |                  2.96232  |
+| makeWholeTractTemplateNImage              |       2.57576  |         2.57576  |      2.572    |      2.57922  |                  2.57817  |
+| analyzeObjectTableSurveyCore              |       3.51176  |         3.51176  |      3.51176  |      3.51176  |                  3.51176  |
+| makeMetricTableObjectTableCore            |       0.499382 |         0.499382 |      0.499382 |      0.499382 |                  0.499382 |
+| objectTableCoreRefCatMatchWholeSkyPlot    |       1.15847  |         1.15847  |      1.15847  |      1.15847  |                  1.15847  |
+| makeDeepCoaddInputSummary                 |       0.611153 |         0.611153 |      0.611153 |      0.611153 |                  0.611153 |
+| consolidateHealSparsePropertyMaps         |       1.15104  |         1.20105  |      0.847549 |      1.25912  |                  1.25531  |
+| makeDeepCoaddInputSummaryTract            |       3.94297  |         2.57801  |      2.57249  |     18.8658   |                 10.1533   |
+| assembleCellCoadd                         |       3.80855  |         4.15405  |      0.600018 |      4.61034  |                  4.32526  |
+| analyzeObjectTableCore                    |       3.3383   |         3.14916  |      2.57492  |      5.05402  |                  4.73978  |
+| makeWholeTractImage                       |       2.57575  |         2.57572  |      2.572    |      2.57922  |                  2.57815  |
+| makeBinnedCoaddImage                      |       2.57558  |         2.5756   |      2.57146  |      2.57888  |                  2.57776  |
+| deblendCoaddFootprints                    |       5.17529  |         5.95815  |      2.92616  |      8.50922  |                  7.42517  |
+| mergeObjectDetection                      |       2.57567  |         2.57562  |      2.56172  |      2.58175  |                  2.57795  |
+| plotPropertyMapTract                      |       5.73027  |         5.73246  |      5.39004  |      6.06255  |                  5.97371  |
+| plotPropertyMapSurvey                     |       5.05564  |         5.35671  |      3.10338  |      5.80174  |                  5.77431  |
+| makePsfMatchedWarp                        |       3.40902  |         3.48077  |      0.703133 |      5.43504  |                  3.64697  |
+| objectTableCoreWholeSkyPlot               |       2.65966  |         2.65966  |      2.65966  |      2.65966  |                  2.65966  |
+| mergeObjectMeasurement                    |       2.57583  |         2.57578  |      2.56742  |      2.57996  |                  2.57825  |
+| catalogMatchTract                         |       2.62423  |         2.57871  |      2.57301  |      2.85443  |                  2.79567  |
+| objectParentTableCoreWholeSkyPlot         |       0.587029 |         0.587029 |      0.587029 |      0.587029 |                  0.587029 |
+| computeObjectEpochs                       |       3.32331  |         2.58011  |      2.57263  |      5.4544   |                  5.13301  |
+| assembleTemplateCoadd                     |       2.42056  |         2.54411  |      0.600018 |      3.32837  |                  2.96232  |
+| fitDeepCoaddPsfGaussians                  |       2.57583  |         2.57578  |      2.56709  |      2.58027  |                  2.5782   |
+| measureObjectUnforced                     |       2.57774  |         2.57594  |      2.56763  |      2.67136  |                  2.58994  |
+| makeTemplateCoaddInputSummary             |       0.542938 |         0.542938 |      0.542938 |      0.542938 |                  0.542938 |
+| selectDeepCoaddVisits                     |       0.654651 |         0.65484  |      0.592125 |      0.69635  |                  0.688838 |
+| refCatObjectTract                         |       2.57628  |         2.57619  |      2.57102  |      2.57982  |                  2.57877  |
+| standardizeObject                         |       3.32331  |         2.58011  |      2.57263  |      5.4544   |                  5.13301  |
+| selectTemplateCoaddVisits                 |       0.655376 |         0.656397 |      0.59359  |      0.69635  |                  0.689296 |
+| makeWholeTractDeepNImage                  |       2.57575  |         2.57571  |      2.572    |      2.57922  |                  2.57815  |
+| makeTemplateCoaddInputSummaryTract        |       2.65578  |         2.57598  |      2.57053  |      3.40516  |                  3.13109  |
+| consolidateParentTable                    |       2.57589  |         2.57587  |      2.56947  |      2.57968  |                  2.57873  |
+| splitPrimaryObject                        |       6.89114  |         4.26217  |      2.57795  |     18.192    |                 16.0149   |
+| measureObjectForced                       |       2.57597  |         2.57594  |      2.56752  |      2.64236  |                  2.57837  |
+| makeMetricTableObjectTableCoreRefCatMatch |       0.489761 |         0.489761 |      0.489761 |      0.489761 |                  0.489761 |
+| validateObjectTableCore                   |       2.57574  |         2.57585  |      2.57043  |      2.57975  |                  2.57838  |
+| makeHealSparsePropertyMaps                |       5.52649  |         4.38968  |      2.57258  |     14.1133   |                 13.7368   |
+| consolidateObject                         |       3.82746  |         2.76657  |      2.5733   |      7.85451  |                  6.71066  |
+
+
+The next two charts show the RSS distribution in 1 GB increments for all quanta processed during Stage 3. A total of 1,308,272 quanta were processed, with 1,979 (around 0.15%) exceeding the 6 GB threshold.  
 
 ```{figure} ./images/MaxRSS_distro_per_task_v30_stage3.png
 :figclass: technote-wide-content
 
-Distribution of maximum RSS per pipetask for the DM‑53877 (`v30.0.0‑rc3`) Stage 3 run.  
-  The green dashed line marks the 95th percentile, the red dashed line the 6 GB threshold.  
-  Bars are grouped in 1 GB bins.
+Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 3 run, with histogram bars grouped in 1 GB bins. The green dashed line indicates the 95th percentile of the RSS values, showing that 95 % of the pipetasks fall at or below this level, while the red dashed line marks the 6 GB memory threshold; tasks that exceed this line may require further optimisation or additional resources. This plot highlights that the majority of pipetasks stay within the prescribed memory threshold, with only a small tail of outliers surpassing the 6 GB boundary.
 ```
 
 ```{figure} ./images/MaxRSS_distro_per_task_v30_log_stage3.png
 :figclass: technote-wide-content
 
-Distribution of maximum RSS per pipetask for the DM‑53877 (`v30.0.0‑rc3`) Stage 3 run with the count on a logarithmic scale.  
-The green dashed line marks the 95th percentile, the red dashed line the 6 GB threshold.  
-Bars are grouped in 1 GB bins
+Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 3 run, with histogram bars grouped in 1 GB bins and the count on a logarithmic scale to improve the visualization. The green dashed line indicates the 95th percentile of the RSS values, showing that 95 % of the pipetasks fall at or below this level, while the red dashed line marks the 6 GB memory threshold; tasks that exceed this line may require further optimisation or additional resources. This plot highlights that the majority of pipetasks stay within the prescribed memory threshold, with only a small tail of outliers surpassing the 6 GB boundary.
 ```
 
-How we can see in the above chart, differents tasks are using more than 6GB of RSS. The following charts visualize all the quanta using more than 6GB of memory grouped by pipetask. We can see that the pipetask `deblendCoaddFootprint` is the one exceeding more ofthen the 6GB threshold. 
 
-```{figure} ./images/MaxRSS_stripplot_per_task_v30_upper6_stage3.png
-:figclass: technote-wide-content
+The next two charts, showing integrated wall time per RSS range, further confirms that 6 GB per core is generally sufficient for almost all Stage 3 pipeline tasks but the `gaussianProcessesTurbulenceFit` pipetask consistently utilizes around 6 GB of memory for extended periods.
 
-quanta exceeding 6GB threshold per pipetask. 
-```
-
-If we switch to 6GB/core worker nodes, these quanta, as shown in the next plot, will block a few cores for a few hundred hours compared to 40 000 hours of total wall time. 
-
-```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage3.png
-:figclass: technote-wide-content
-
-Integrated Wall Time per Range of RSS for stage 3 process thresholded to quanta exceeding 6GB of memory. 
-The dashed red line indicates the 6GB threshold.
-```
+If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will mobilize some cores for ~249  hours compared (~0.15%) to ~38,637 hours total walltime. 
 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_stage3.png
 :figclass: technote-wide-content
 
-Integrated Wall Time per Range of RSS for stage 3 process. 
-The dashed red line indicates the 6GB threshold.
+Integrated walltime per RSS range for Stage 3 processes.
+Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
+Tasks that exceed 6 GB of RSS account for a total of ~249 hours of walltime compared to the 38,637hours of total walltime.
+```
+
+```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage3.png
+:figclass: technote-wide-content
+Integrated walltime per RSS range for Stage 3 processes depassing 6GB.
+Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
+Tasks that exceed 6 GB of RSS account for a total of ~249 hours of walltime compared to the 38,637 hours of total walltime.
 ```
 
 
@@ -263,39 +332,89 @@ As shown in the following chart, we have few pipeatsk exceeding systematically t
 ```{figure} ./images/MaxRSS_box_all_stacks_stage4.png
 :figclass: technote-wide-content
 
-Box Plot comparing the stage 4 pipetask max RSS. 
-The dashed red line show the 6GB threshold. 
+Box plot showing maximum RSS for Stage 4 pipetasks in v30.0.4 release. 
+Orange and red dashed lines indicate 4GB and 6GB memory thresholds. 
+Most tasks require < 6 GB RSS, but some quanta of `associateAnalysisSource`, `skyCorr`, and `analyzeSourceAssoclation` exceed this threshold.
 ```
 
-However, as demonstrated in the next two charts, the number of quanta (quanta) exceeding the thresholds is quite minimal compared to the total: in fact, we had 72 quanta exceeding the threshold and 2 321 953 quanta processed. 
+```{figure} ./images/MaxRSS_stripplot_per_task_v30_upper6_stage4.png
+:figclass: technote-wide-content
+
+The plot displays number of runs (quanta) per Stage 4 pipetask that exceed the 6 GB memory threshold (dashed red line). Each diamond marks the frequency (or number of quanta) at which a given task reaches a specific memory level. 
+```
+Summary of RSS usage for each pipetask in Stage 4 is reported in the next table. 
+```{rst-class} technote-wide-content
+```
+|                                           |   max_rss_mean |   max_rss_median |   max_rss_min |   max_rss_max |   max_rss_95th_percentile |
+|:------------------------------------------|---------------:|-----------------:|--------------:|--------------:|--------------------------:|
+| computeReliability                        |       3.40115  |         3.35599  |      1.24137  |      4.74003  |                  3.89839  |
+| standardizeDiaSource                      |       3.4009   |         3.35596  |      1.24137  |      4.74003  |                  3.89839  |
+| makeAnalysisSourceAssociationWholeSkyPlot |       2.26207  |         2.26207  |      2.26207  |      2.26207  |                  2.26207  |
+| splitPrimarySource                        |       2.05626  |         2.08863  |      0.998497 |      3.54106  |                  3.03666  |
+| forcedPhotDiaObjectDetector               |       1.23566  |         1.22809  |      0.952499 |      1.32349  |                  1.29137  |
+| standardizeSource                         |       1.82261  |         1.79641  |      1.10159  |      3.47886  |                  2.07528  |
+| filterDiaSource                           |       3.40121  |         3.35601  |      1.24137  |      4.74003  |                  3.89839  |
+| associateDiaSource                        |       1.08492  |         1.05676  |      0.989223 |      1.40002  |                  1.3506   |
+| standardizeDiaObjectForcedSource          |       1.01899  |         0.95816  |      0.921131 |      2.55805  |                  1.46923  |
+| consolidateDiaSource                      |       1.20771  |         1.00259  |      0.992447 |      2.75513  |                  2.18333  |
+| associateAnalysisSource                   |       8.29251  |         8.62498  |      1.06258  |     20.243    |                 16.9474   |
+| analyzeSourceAssociation                  |      17.2298   |        13.8867   |      1.11311  |     52.4146   |                 52.2619   |
+| analyzeDiaSourceTableTract                |       1.02561  |         0.999922 |      0.992092 |      1.31514  |                  1.2466   |
+| reprocessVisitImage                       |       1.75376  |         1.73119  |      1.13905  |      3.47886  |                  1.99347  |
+| makeWholeTractPrettyCoaddImage            |       0.942893 |         0.933582 |      0.925068 |      0.988426 |                  0.960958 |
+| skyCorr                                   |      15.5696   |        15.5163   |     15.4282   |     15.6787   |                 15.6703   |
+| consolidateVisitDiaSource                 |       1.02144  |         1.02146  |      1.01239  |      1.02584  |                  1.02387  |
+| calculateDiaObject                        |       1.08962  |         1.05954  |      0.989223 |      1.43301  |                  1.36909  |
+| consolidateDiaObject                      |       1.03114  |         1.00198  |      0.991974 |      1.43875  |                  1.26616  |
+| detectAndMeasureDiaSource                 |       3.3683   |         3.31585  |      1.24137  |      4.74003  |                  3.88423  |
+| standardizeObjectForcedSource             |       1.29109  |         0.959755 |      0.949585 |      3.6499   |                  3.31977  |
+| makeBinnedPrettyCoaddImage                |       0.970211 |         0.952377 |      0.920452 |      1.19641  |                  1.12585  |
+| makeBinnedPrettyNImage                    |       0.943863 |         0.95055  |      0.919342 |      0.961758 |                  0.959702 |
+| makePrettyDirectWarp                      |       2.65413  |         2.7501   |      0.918617 |      3.33527  |                  2.95333  |
+| assemblePrettyCoadd                       |       2.53094  |         2.5476   |      0.926598 |      3.44558  |                  2.87072  |
+| makeWholeTractPrettyNImage                |       0.939257 |         0.929531 |      0.925667 |      0.960793 |                  0.95993  |
+| splitPrimaryObjectForcedSource            |       1.35045  |         0.959896 |      0.949177 |      4.02045  |                  3.55207  |
+| makeAnalysisSourceAssociationMetricTable  |       0.503857 |         0.503857 |      0.503857 |      0.503857 |                  0.503857 |
+| filterDiaSourcePostReliability            |       3.40105  |         3.35599  |      1.24137  |      4.74003  |                  3.89839  |
+| forcedPhotObjectDetector                  |       1.29355  |         1.28862  |      1.19354  |      1.40014  |                  1.34867  |
+| consolidateSource                         |       1.17934  |         1.18887  |      0.996571 |      1.54529  |                  1.39815  |
+| subtractImages                            |       3.25719  |         3.19458  |      1.24137  |      4.65683  |                  3.78299  |
+| makePrettyPsfMatchedWarp                  |       1.89612  |         1.96549  |      0.918522 |      2.2924   |                  2.28677  |
+| buildTemplate                             |       2.73482  |         2.73365  |      1.24137  |      4.21315  |                  3.24956  |
+| analyzeRecalibratedStarObjectMatch        |       1.50746  |         1.67629  |      1.06583  |      1.7955   |                  1.73455  |
+
+
+However, as demonstrated in the next two charts, the number of quanta (quanta) exceeding the thresholds is quite minimal compared to the total: in fact, we had 1137 (0.04%) quanta exceeding the threshold and 3,408,460 quanta processed in total. 
 
 ```{figure} ./images/MaxRSS_distro_per_task_v30_stage4.png
 :figclass: technote-wide-content
 
-The distribution of the RSS for all the pipetask executed during the DM-53719 stage 4. The green dashed line represents the 95th percentile, and the dashed red line indicates the 6GB threshold.
+Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 4 run, with histogram bars grouped in 1 GB bins. The green dashed line indicates the 95th percentile of the RSS values, showing that 95 % of the pipetasks fall at or below this level, while the red dashed line marks the 6 GB memory threshold; tasks that exceed this line may require further optimisation or additional resources. This plot highlights that the majority of pipetasks stay within the prescribed memory threshold, with only a small tail of outliers surpassing the 6 GB boundary.
 ```
 
 ```{figure} ./images/MaxRSS_distro_per_task_v30_log_stage4.png
 :figclass: technote-wide-content
 
-The distribution of the RSS for all the pipetask executed during the DM-53719 Stage 4 with the count on a logarithmic scale. The green dashed line represents the 95th percentile, and the dashed red line indicates the 6GB threshold.
+Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 4 run, with histogram bars grouped in 1 GB bins and the count on a logarithmic scale to improve the visualization. The green dashed line indicates the 95th percentile of the RSS values, showing that 95 % of the pipetasks fall at or below this level, while the red dashed line marks the 6 GB memory threshold; tasks that exceed this line may require further optimisation or additional resources. This plot highlights that the majority of pipetasks stay within the prescribed memory threshold, with only a small tail of outliers surpassing the 6 GB boundary.
 ```
-If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will block a few cores for ~60 hours compared to ~63 000 hours of total walltime. 
 
-```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage4.png
-:figclass: technote-wide-content
+If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will mobilize a few cores for ~2,893 hours  (~4%) compared to ~73,137 hours of total walltime. 
 
-Integrated Wall Time per Range of RSS for stage 4 process thresholded to quanta exceeding 6GB of memory. 
-The dashed red line indicates the 6GB threshold.
-```
 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_stage4.png
 :figclass: technote-wide-content
 
-Integrated Wall Time per Range of RSS for stage 3 process. 
-The dashed red line indicates the 6GB threshold.
+Integrated walltime per RSS range for Stage 4 processes.
+Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
+Tasks that exceed 6 GB of RSS account for a total of ~2,893 hours of walltime (~4%) compared to the 73,137 hours of total walltime.
 ```
 
+```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage4.png
+:figclass: technote-wide-content
+Integrated walltime per RSS range for Stage 4 processes depassing 6GB.
+Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
+Tasks that exceed 6 GB of RSS account for a total of ~2,893 hours of walltime (~4%) compared to the 73,137 hours of total walltime.
+```
 
 
 ## 4. Conclusion
@@ -334,20 +453,19 @@ Cumulative fraction of Stage 4 quanta per Max RSS. The green dashed line represe
 
 The following table presents the number of quanta exceeding the GB threshold for each campaign, indicating that:
 
-* Stage 1: 6 GB/core is sufficient for 99.993% of quanta.
-* Stage 2: 6 GB/core is sufficient for 99.7% of quanta.
-* Stage 3: 6 GB/core is sufficient for 99.85% of quanta.
-* Stage 4: 6 GB/core is sufficient for 99.997% of quanta.
- 
+* Stage 1: 6 GB per core is sufficient for 99.994 % of the quanta in terms of the number of jobs, and for 99.7 % of the quanta in terms of walltime.
+* Stage 2: 6 GB per core is sufficient for 99.7 % of the quanta in terms of the number of jobs, and for 75 % of the quanta in terms of walltime.
+* Stage 3: 6 GB per core is sufficient for 99.85 % of the quanta in terms of the number of jobs, and for 99.85% of the quanta in terms of wall‑time.
+* Stage 4: 6 GB per core is sufficient for 99.96 % of the quanta in terms of the number of jobs, and for 96 % of the quanta in terms of wall‑time.
 
 ```{rst-class} technote-wide-content
 ```
-| Stage | Quanta | N. quanta > 6GB | % quanta > 6GB| 
-|-------|--------|---------------|--------------|
-| Stage 1 | 574472 | 40 | 0.007 |
-| Stage 2 | 565778 | 1706 | 0.3 |
-| Stage 3 |1308272 | 1979 | 0.15| 
-|Stage 4| 2321953| 72 | 0.003 | 
+| Stage | Quanta | N. quanta > 6GB | % quanta > 6GB | Walltime (h) > 6GB |  % walltime > 6GB | Total Walltime| 
+|-------|--------|---------------|--------------|--------------| --------------| --------------|
+| Stage 1 | 574,472 | 36 | 0.006 | 3.3  | 0.3 | 10045 |
+| Stage 2 | 567,886 | 1916 | 0.3 | 2077 | 25| 8267 |
+| Stage 3 |1,308,272 | 1,979 | 0.15| 249 | 0.15 |8267 | 
+|Stage 4| 3,408,460 | 1,137 | 0.04 | 2,893 | 4 | 8267 |
 
 
 ## References
