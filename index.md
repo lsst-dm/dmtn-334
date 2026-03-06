@@ -38,9 +38,9 @@ Our goal is to determine whether a **6 GB / core** threshold would be suff
 
 ## Analysis and Results
 
-We analyze each campaign stage-by-stage.
+We analyze each campaign stage-by-Stage.
 
-To demonstrate the improvements introduced in version 30, we present a comparative analysis of stage 1 for of all the stacks  in the following figure. However, we will now focus exclusively on data from the `DM-54249` campaign based on the `v30.0.4` release and we included the comparison between stacks in the annexes. 
+To demonstrate the improvements introduced in version 30, we present a comparative analysis of Stage 1 for of all the stacks  in the following figure. However, we will now focus exclusively on data from the `DM-54249` campaign based on the `v30.0.4` release and we included the comparison between stacks in the annexes. 
 
 ```{figure} ./images/MaxRSSTask_all_stacks_stage1.png
 :figclass: technote-wide-content
@@ -63,13 +63,13 @@ Orange and red dashed lines indicate 4GB and 6GB memory thresholds.
 Almost all tasks require <6GB RSS, except `analyzeSingleVisitStarAssociation`.
 ```
 
-The following chart shows the quanta for pipetasks that exceed the 6 GB threshold, weighted by walltime. For Stage 1, the few outliers (`analyzeSingleVisitStarAssociation` and `associatesIsolateleStar`) have a negligible impact on walltime; this will be discussed further below.
+The following chart shows the quanta for pipetasks that exceed the 6 GB threshold, weighted by wall-time. For Stage 1, the few outliers (`analyzeSingleVisitStarAssociation` and `associatesIsolateleStar`) have a negligible impact on wall-time; this will be discussed further below.
 
 ```{figure} ./images/MaxRSS_stripplot_per_task_v30_upper6_stage1_walltime.png
 :figclass: technote-wide-content
 
 **Stage 1 Pipetask Runs Exceeding the 6 GB Memory Threshold – Frequency and Wall‑time Impact**
-The plot displays the number of runs (quanta) per Stage 1 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of the circle is proportional to the walltime of the quanta, showing that the impact on the cores mobilised to handle the memory excess is limited.
+The plot displays the number of runs (quanta) per Stage 1 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of the circle is proportional to the wall-time of the quanta, showing that the impact on the cores mobilised to handle the memory excess is limited.
 ```
 
 To summarize the RSS usage, the main statistics for Stage 1 are listed in the following table.
@@ -109,7 +109,7 @@ The majority of these exceeding quanta are attributed to the `analyzeSingleVisit
 Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **574 472** quanta were examined, of which only **36** (≈ 0.006 %) exceed the 6 GB limit.
 ```
 
-In the next two figures we incorporate walltime as a weighting factor (i.e., the total wall‑time summed for all tasks whose peak RSS falls within each defined memory‑usage interval) to better reflect the core‑hours required to satisfy the memory demand of each pipetask, and to highlight the memory regimes that dominate the overall runtime. 
+In the next two figures we incorporate wall-time as a weighting factor (i.e., the total wall‑time summed for all tasks whose peak RSS falls within each defined memory‑usage interval) to better reflect the core‑hours required to satisfy the memory demand of each pipetask, and to highlight the memory regimes that dominate the overall runtime. 
 
 It further confirms that 6 GB per core is generally sufficient for almost all Stage 1 pipetasks. In fact, the tasks that require more than 6 GB of RSS account for only **≈ 3.3** hours of wall‑time, compared with the **10 050** hours of total wall‑time for the entire Stage 1 run.
 
@@ -117,17 +117,17 @@ It further confirms that 6 GB per core is generally sufficient for almost all 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_stage1.png
 :figclass: technote-wide-content
 
-**Integrated walltime per RSS range for for the DM‑54249 (v30.0.4) Stage 1 processes.**
+**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 1 processes.**
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of **3 hours** of walltime compared to the **10 050 hours** of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of **3 hours** of wall-time compared to the **10 050 hours** of total wall-time.
 ```
 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage1.png
 :figclass: technote-wide-content
 
-**Integrated walltime per RSS range for for the DM‑54249 (v30.0.4) Stage 1 processes depassing 6GB.** 
+**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 1 processes depassing 6GB.** 
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of **3 hours** of walltime compared to the **10 050 hours** of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of **3 hours** of wall-time compared to the **10 050 hours** of total wall-time.
 ```
 
 ### Stage 2 
@@ -205,17 +205,17 @@ The next two charts, showing integrated wall time per RSS range, further confirm
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_stage2.png
 :figclass: technote-wide-content
 
-**Integrated walltime per RSS range for for the DM‑54249 (v30.0.4) Stage 2.** 
+**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 2.** 
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of **2 077 hours (25%) of walltime compared to the 8 267 hours** of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of **2 077 hours (25%) of wall-time compared to the 8 267 hours** of total wall-time.
 ```
 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage2.png
 :figclass: technote-wide-content
 
-**Integrated walltime per RSS range for for the DM‑54249 (v30.0.4) Stage 2 processes depassing 6GB.** 
+**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 2 processes depassing 6GB.** 
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of **2 077 hours (25%) of walltime compared to the 8 267** hours of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of **2 077 hours (25%) of wall-time compared to the 8 267** hours of total wall-time.
 ```
 
 ### Stage3
@@ -232,13 +232,13 @@ Almost all tasks require <6GB RSS.
 ```
 
 
-As shown in the chart above, several tasks have outliers exceeding the 6 GB of RSS threshold. The next figures display all quanta that use more than 6 GB of memory, grouped by pipetask. The pipetasks **`deblendCoaddFootprint`** and **`makeHealSparsePropertyMaps`** are the ones that exceed the 6 GB threshold most frequently. While the wall‑time for `deblendCoaddFootprint` is negligible, `makeHealSparsePropertyMaps` requires a not negligeable amount of walltime. 
+As shown in the chart above, several tasks have outliers exceeding the 6 GB of RSS threshold. The next figures display all quanta that use more than 6 GB of memory, grouped by pipetask. The pipetasks **`deblendCoaddFootprint`** and **`makeHealSparsePropertyMaps`** are the ones that exceed the 6 GB threshold most frequently. While the wall‑time for `deblendCoaddFootprint` is negligible, `makeHealSparsePropertyMaps` requires a not negligeable amount of wall-time. 
 
 ```{figure} ./images/MaxRSS_stripplot_per_task_v30_upper6_stage3_walltime.png
 :figclass: technote-wide-content
 
 **Stage 3 Pipetask Runs Exceeding the 6 GB Memory Threshold – Frequency and Wall‑time Impact**
-The plot displays the number of runs (quanta) per Stage 3 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of the circle is proportional to the walltime of the quanta, showing that the impact on the cores mobilised to handle the memory excess is more important than for Stage 1 in particular for **`deblendCoaddFootprint`** and **`makeHealSparsePropertyMaps`**  pipetasks.
+The plot displays the number of runs (quanta) per Stage 3 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of the circle is proportional to the wall-time of the quanta, showing that the impact on the cores mobilised to handle the memory excess is more important than for Stage 1 in particular for **`deblendCoaddFootprint`** and **`makeHealSparsePropertyMaps`**  pipetasks.
 ```
 
 To summarize the RSS usage, the main statistics for Stage 3 are listed in the following table. 
@@ -326,17 +326,17 @@ The next two charts, showing integrated wall time per RSS range, further confirm
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_stage3.png
 :figclass: technote-wide-content
 
-**Integrated walltime per RSS range for for the DM‑54249 (v30.0.4) Stage 3.** 
+**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 3.** 
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of **124 h (0.5%) of walltime compared to the 25 974 h** of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of **124 h (0.5%) of wall-time compared to the 25 974 h** of total wall-time.
 ```
-If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will mobilize some cores for **~124  hours** compared (~0.5%) to **~25 974 hours** total walltime. 
+If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will mobilize some cores for **~124  hours** compared (~0.5%) to **~25 974 hours** total wall-time. 
 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage3.png
 :figclass: technote-wide-content
-**Integrated walltime per RSS range for for the DM‑54249 (v30.0.4) Stage 3 processes depassing 6GB.** 
+**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 3 processes depassing 6GB.** 
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of **124 h (0.5%) of walltime compared to the 25 974 h** of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of **124 h (0.5%) of wall-time compared to the 25 974 h** of total wall-time.
 ```
 
 
@@ -358,7 +358,7 @@ Most tasks require < 6 GB RSS, but many quanta of `associateAnalysisSource`,
 :figclass: technote-wide-content
 
 **Stage 4 Pipetask Runs Exceeding the 6 GB Memory Threshold – Frequency and Wall‑time Impact**
-The plot displays the number of runs (quanta) per Stage 4 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of the circle is proportional to the walltime of the quanta, showing that the impact on the cores mobilised to handle the memory excess is important in particular for **`skyCorr`** and **`associateAnalysisSource`**  pipetasks.
+The plot displays the number of runs (quanta) per Stage 4 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of the circle is proportional to the wall-time of the quanta, showing that the impact on the cores mobilised to handle the memory excess is important in particular for **`skyCorr`** and **`associateAnalysisSource`**  pipetasks.
 ```
 
 Summary of RSS usage for each pipetask in Stage 4 is reported in the next table. 
@@ -421,22 +421,22 @@ Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th�
 Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **2 593 783** quanta were examined, of which **1143** (≈ 0.04 %) exceed the 6 GB limit.
 ```
 
-If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will mobilize a few cores for **2 184 h  (~4%)** compared to **52 124 h** of total walltime. 
+If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will mobilize a few cores for **2 184 h  (~4%)** compared to **52 124 h** of total wall-time. 
 
 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_stage4.png
 :figclass: technote-wide-content
 
-**Integrated walltime per RSS range for for the DM‑54249 (v30.0.4) Stage 4.** 
+**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 4.** 
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of **2 184 h (~4%) of walltime compared to the 52 124 h** of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of **2 184 h (~4%) of wall-time compared to the 52 124 h** of total wall-time.
 ```
 
 ```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage4.png
 :figclass: technote-wide-content
-**Integrated walltime per RSS range for for the DM‑54249 (v30.0.4) Stage 3 processes depassing 6GB.** 
+**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 3 processes depassing 6GB.** 
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
-Tasks that exceed 6 GB of RSS account for a total of **2 184 h (~4%) of walltime compared to the 52 124 h** of total walltime.
+Tasks that exceed 6 GB of RSS account for a total of **2 184 h (~4%) of wall-time compared to the 52 124 h** of total wall-time.
 ```
 
 
@@ -452,23 +452,23 @@ As shown, 99.9% of pipetasks in Stage 1 use less than 6 GB of memory (Figure 6).
 
 **Cumulative fraction of Stage 1 quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. Only 0.006% of quanta exceed the 6GB threshold.  
 ```
-As shown in the next Figure,  99% of pipetasks in Stage 2 use less than 6 GB of memory (Figure 6). Only 0.3% exceed this threshold, indicating that reducing memory allocation to 6 GB per core is feasible for the majority of operations. However, when we take the wall‑time required by the tasks that exceed the limit into account, the impact in Stage 2 is far from negligible: the few tasks that use more than 6 GB of memory account for roughly 25 % of the total wall‑time, mainly because of the pipetask **gaussianProcessesTurbulenceFit**.
+As shown in the next Figure,  99% of pipetasks in Stage 2 use less than 6 GB of memory (Figure 6). Only 0.3% exceed this threshold, indicating that reducing memory allocation to 6 GB per core is feasible for the majority of operations. However, when we take the wall‑time required by the tasks that exceed the limit into account, the impact in Stage 2 is far from negligible: the few tasks that use more than 6 GB of memory account for roughly **25 % of the total wall‑time**, mainly because of the pipetask **gaussianProcessesTurbulenceFit**.
 The 95th percentile threshold is approximately 4 GB. 
 
 ```{figure} ./images/MaxRSS_CDF_v30_stage2.png 
 :figclass: technote-wide-content
 
-**Cumulative fraction of Stage 2 quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. Only 0.3% of quanta exceed the 6GB threshold but these quanta account ~25% of the total walltime. 
+**Cumulative fraction of Stage 2 quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. Only 0.3% of quanta exceed the 6GB threshold but these quanta account ~25% of the total wall-time. 
 ```
 
-When comparing cumulative plots between Stage 1 and Stage 3 (Figures 26 and 28), Stage 3 shows a slightly higher fraction of pipetasks exceeding 6 GB (0.07% vs. 0.006%). However, the majority of tasks still remain below the critical threshold, supporting the feasibility of a 6 GB per core allocation. Looking at the walltime, the impact due to quanta exceeding the 6GB threshold is limited  to 0.5% of the total walltime. 
+When comparing cumulative plots between Stage 1 and Stage 3 (Figures 26 and 28), Stage 3 shows a slightly higher fraction of pipetasks exceeding 6 GB (0.07% vs. 0.006%). However, the majority of tasks still remain below the critical threshold, supporting the feasibility of a 6 GB per core allocation. Looking at the wall-time, the impact due to quanta exceeding the 6GB threshold is limited  to 0.5% of the total wall-time. 
 
 ```{figure} ./images/MaxRSS_CDF_v30_stage3.png 
 :figclass: technote-wide-content
 
 **Cumulative fraction of Stage 3  quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. 
 ```
-Also for the tage 4, cumulative plots confirm that reducing memory allocation to 6 GB per core would suffice for over 99% of pipetasks.
+Also for Stage 4, the cumulative plots confirm that reducing the memory allocation to **6 GB per core** would be sufficient for **more than 99 %** of the pipetasks, even though the outliers that exceed the memory threshold account for **4 % of the total wall‑time** – a contribution that is not negligible.
 
 ```{figure} ./images/MaxRSS_CDF_v30_stage4.png 
 :figclass: technote-wide-content
@@ -478,14 +478,14 @@ Also for the tage 4, cumulative plots confirm that reducing memory allocation to
 
 The following table presents the number of quanta exceeding the GB threshold for each campaign, indicating that:
 
-* Stage 1: 6 GB per core is sufficient for 99.994 % of the quanta in terms of the number of jobs, and for 99.97 % of the quanta in terms of walltime.
-* Stage 2: 6 GB per core is sufficient for 99.67 % of the quanta in terms of the number of jobs, and for 75 % of the quanta in terms of walltime.
+* Stage 1: 6 GB per core is sufficient for 99.994 % of the quanta in terms of the number of jobs, and for 99.97 % of the quanta in terms of wall-time.
+* Stage 2: 6 GB per core is sufficient for 99.67 % of the quanta in terms of the number of jobs, and for 75 % of the quanta in terms of wall-time.
 * Stage 3: 6 GB per core is sufficient for 99.93 % of the quanta in terms of the number of jobs, and for 99.5% of the quanta in terms of wall‑time.
 * Stage 4: 6 GB per core is sufficient for 99.96 % of the quanta in terms of the number of jobs, and for 96 % of the quanta in terms of wall‑time.
 
 ```{rst-class} technote-wide-content
 ```
-| Stage   | Quanta   | N. quanta > 6GB | % quanta > 6GB | Total Walltime (h)| Walltime (h) > 6GB |  % walltime > 6GB |
+| Stage   | Quanta   | N. quanta > 6GB | % quanta > 6GB | Total Walltime (h)| Walltime (h) > 6GB |  % wall-time > 6GB |
 |--------:|---------:|----------------:|---------------:|------------------:| ------------------:| -----------------:|
 | Stage 1 |574,472   |36               |0.006           |10049.86           |3.28                |0.03               |
 | Stage 2 |567,886   |1,916            |0.337           |8267.89            |2077.15             |25.12              |
