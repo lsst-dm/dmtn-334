@@ -461,14 +461,14 @@ The 95th percentile threshold is approximately 4 GB.
 **Cumulative fraction of Stage 2 quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. Only 0.3% of quanta exceed the 6GB threshold but these quanta account ~25% of the total wall-time. 
 ```
 
-When comparing cumulative plots between Stage 1 and Stage 3 (Figures 26 and 28), Stage 3 shows a slightly higher fraction of pipetasks exceeding 6 GB (0.07% vs. 0.006%). However, the majority of tasks still remain below the critical threshold, supporting the feasibility of a 6 GB per core allocation. Looking at the wall-time, the impact due to quanta exceeding the 6GB threshold is limited  to 0.5% of the total wall-time. 
+When comparing cumulative plots between Stage 1 and Stage 3 (Figures 26 and 28), Stage 3 shows a slightly higher fraction of pipetasks exceeding 6 GB (0.07% vs. 0.006%). However, the majority of tasks still remain below the critical threshold, supporting the feasibility of a 6 GB per core allocation. Looking at the wall-time, the impact due to quanta exceeding the 6GB threshold is limited  to **0.5% of the total wall-time**. 
 
 ```{figure} ./images/MaxRSS_CDF_v30_stage3.png 
 :figclass: technote-wide-content
 
 **Cumulative fraction of Stage 3  quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. 
 ```
-Also for Stage 4, the cumulative plots confirm that reducing the memory allocation to **6 GB per core** would be sufficient for **more than 99 %** of the pipetasks, even though the outliers that exceed the memory threshold account for **4 % of the total wall‑time** – a contribution that is not negligible.
+Also for Stage 4, the cumulative plots confirm that reducing the memory allocation to 6 GB per core would be sufficient for more than 99 % of the pipetasks, even though the outliers that exceed the memory threshold account for **4 % of the total wall‑time** – a contribution that is not negligible.
 
 ```{figure} ./images/MaxRSS_CDF_v30_stage4.png 
 :figclass: technote-wide-content
