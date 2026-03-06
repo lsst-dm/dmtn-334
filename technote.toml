@@ -21,3 +21,18 @@ orcid = "https://orcid.org/0000-0003-2384-2377"
 name = "CNRS/IN2P3, CC-IN2P3"
 internal_id = "IN2P3-CC"
 address = "Villeurbanne"
+[[technote.authors]]
+name = {given = "Fabio", family = "Hernandez"}
+internal_id = "hernandezf"
+orcid = "https://orcid.org/0000-0001-7203-2552"
+[[technote.authors.affiliations]]
+name = "CNRS"
+internal_id = "Lyon-CC-IN2P3"
+address = "CC-IN2P3, 21 avenue Pierre de Coubertin, CS70202, F-69627 Villeurbanne cedex, France"
+[[technote.authors]]
+name = {given = "Quentin", family = "Le Boulc'h"}
+internal_id = "leboulchq"
+[[technote.authors.affiliations]]
+name = "CNRS"
+internal_id = "Lyon-CC-IN2P3"
+address = "CC-IN2P3, 21 avenue Pierre de Coubertin, CS70202, F-69627 Villeurbanne cedex, France"
