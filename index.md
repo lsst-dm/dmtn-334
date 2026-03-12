@@ -97,7 +97,7 @@ The next two charts depict the RSS distribution, binned in 1 GB intervals, for
 :figclass: technote-wide-content
 
 **Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 1 run.**
-Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **574 472** quanta were examined, of which only **36** (≈ 0.006 %) exceed the 6 GB limit.
+Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively; tasks above the 6GB threshold may need further optimisation or additional resources. Overall, **574 472** quanta were examined, of which only **36** (≈ 0.006 %) exceed the 6 GB limit.
 ```
 
 The majority of these exceeding quanta are attributed to the `analyzeSingleVisitStarAssociation` pipetask as visible in the next chart using logaritmic scale to improve the visualization of the outlier .
@@ -106,7 +106,7 @@ The majority of these exceeding quanta are attributed to the `analyzeSingleVisit
 :figclass: technote-wide-content
 
 **Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 1 run (logaritmic scale).**
-Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **574 472** quanta were examined, of which only **36** (≈ 0.006 %) exceed the 6 GB limit.
+Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively; tasks above the 6GB threshold may need further optimisation or additional resources. Overall, **574 472** quanta were examined, of which only **36** (≈ 0.006 %) exceed the 6 GB limit.
 ```
 
 In the next two figures we incorporate wall-time as a weighting factor (i.e., the total wall‑time summed for all tasks whose peak RSS falls within each defined memory‑usage interval) to better reflect the core‑hours required to satisfy the memory demand of each pipetask, and to highlight the memory regimes that dominate the overall runtime. 
@@ -186,7 +186,7 @@ The next two charts depict the RSS distribution, binned in 1 GB intervals, for
 :figclass: technote-wide-content
 
 **Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 2 run.**
-Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **567 886** quanta were examined, of which **1916** (≈ 0.3 %) exceed the 6 GB limit.
+Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively; tasks above the 6GB threshold may need further optimisation or additional resources. Overall, **567 886** quanta were examined, of which **1916** (≈ 0.3 %) exceed the 6 GB limit.
 ```
 
 ```{figure} ./images/MaxRSS_distro_per_task_v30_log_stage2.png
@@ -194,7 +194,7 @@ Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th�
 
 
 **Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 2 run (logaritmic scale).**
-Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **567 886** quanta were examined, of which **1916** (≈ 0.3 %) exceed the 6 GB limit.
+Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively; tasks above the 6GB threshold may need further optimisation or additional resources. Overall, **567 886** quanta were examined, of which **1916** (≈ 0.3 %) exceed the 6 GB limit.
 ```
 
 
@@ -210,10 +210,11 @@ Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, re
 Tasks that exceed 6 GB of RSS account for a total of **2 077 hours (25%) of wall-time compared to the 8 267 hours** of total wall-time.
 ```
 
-```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage2.png
+```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage2_log.png
 :figclass: technote-wide-content
 
 **Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 2 processes depassing 6GB.** 
+Y-axis in logarithmic scale.
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
 Tasks that exceed 6 GB of RSS account for a total of **2 077 hours (25%) of wall-time compared to the 8 267** hours of total wall-time.
 ```
@@ -308,14 +309,14 @@ The next two charts depict the RSS distribution, binned in 1 GB intervals, for
 :figclass: technote-wide-content
 
 **Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 3 run.**
-Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **887 683** quanta were examined, of which **637** (≈ 0.07 %) exceed the 6 GB limit.
+Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively; tasks above the 6GB threshold line may need further optimisation or additional resources. Overall, **887 683** quanta were examined, of which **637** (≈ 0.07 %) exceed the 6 GB limit.
 ```
 
 ```{figure} ./images/MaxRSS_distro_per_task_v30_log_stage3.png
 :figclass: technote-wide-content
 
 **Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 3 run (logaritmic scale).**
-Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **887 683** quanta were examined, of which **637** (≈ 0.07 %) exceed the 6 GB limit.
+Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively; tasks above the 6GB threshold may need further optimisation or additional resources. Overall, **887 683** quanta were examined, of which **637** (≈ 0.07 %) exceed the 6 GB limit.
 ```
 
 
@@ -411,14 +412,14 @@ However, as demonstrated in the next two charts, the number of quanta (quanta) e
 :figclass: technote-wide-content
 
 **Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 4 run.**
-Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **2 593 783** quanta were examined, of which **1143** (≈ 0.04 %) exceed the 6 GB limit.
+Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively; tasks above the 6GB threshold may need further optimisation or additional resources. Overall, **2 593 783** quanta were examined, of which **1143** (≈ 0.04 %) exceed the 6 GB limit.
 ```
 
 ```{figure} ./images/MaxRSS_distro_per_task_v30_log_stage4.png
 :figclass: technote-wide-content
 
 **Distribution of the maximum RSS per pipetask for the DM‑54249 (v30.0.4) Stage 4 run (logaritmic scale).**
-Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while the red dashed line indicates the 6 GB memory threshold; tasks above this line may need further optimisation or additional resources. Overall, **2 593 783** quanta were examined, of which **1143** (≈ 0.04 %) exceed the 6 GB limit.
+Histogram bars are grouped in 1‑GB bins. The green dashed line marks the 95th‑percentile  of the RSS values (95 % of pipetasks lie at or below this level), while dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively; tasks above the 6GB threshold may need further optimisation or additional resources. Overall, **2 593 783** quanta were examined, of which **1143** (≈ 0.04 %) exceed the 6 GB limit.
 ```
 
 If we switch to 6GB/core workernodes, these quanta, as shown in the next plot, will mobilize a few cores for **2 184 h  (~4%)** compared to **52 124 h** of total wall-time. 
@@ -432,9 +433,10 @@ Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, re
 Tasks that exceed 6 GB of RSS account for a total of **2 184 h (~4%) of wall-time compared to the 52 124 h** of total wall-time.
 ```
 
-```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage4.png
+```{figure} ./images/MaxRSS_distro_CumulatedCPU_v30_upper6_stage4_log.png
 :figclass: technote-wide-content
-**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 3 processes depassing 6GB.** 
+**Integrated wall-time per RSS range for for the DM‑54249 (v30.0.4) Stage 4 processes depassing 6GB.**
+Y-axis in logarithmic scale.
 Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds, respectively.
 Tasks that exceed 6 GB of RSS account for a total of **2 184 h (~4%) of wall-time compared to the 52 124 h** of total wall-time.
 ```
@@ -450,7 +452,7 @@ As shown, 99.9% of pipetasks in Stage 1 use less than 6 GB of memory (Figure 6).
 ```{figure} ./images/MaxRSS_CDF_v30_stage1.png 
 :figclass: technote-wide-content
 
-**Cumulative fraction of Stage 1 quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. Only 0.006% of quanta exceed the 6GB threshold.  
+**Cumulative fraction of Stage 1 quanta per Max RSS.**  The green dashed line represents the 95% of total quanta, dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds. Only 0.006% of quanta exceed the 6GB threshold.  
 ```
 As shown in the next Figure,  99% of pipetasks in Stage 2 use less than 6 GB of memory (Figure 6). Only 0.3% exceed this threshold, indicating that reducing memory allocation to 6 GB per core is feasible for the majority of operations. However, when we take the wall‑time required by the tasks that exceed the limit into account, the impact in Stage 2 is far from negligible: the few tasks that use more than 6 GB of memory account for roughly **25 % of the total wall‑time**, mainly because of the pipetask **gaussianProcessesTurbulenceFit**.
 The 95th percentile threshold is approximately 4 GB. 
@@ -458,7 +460,7 @@ The 95th percentile threshold is approximately 4 GB.
 ```{figure} ./images/MaxRSS_CDF_v30_stage2.png 
 :figclass: technote-wide-content
 
-**Cumulative fraction of Stage 2 quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. Only 0.3% of quanta exceed the 6GB threshold but these quanta account ~25% of the total wall-time. 
+**Cumulative fraction of Stage 2 quanta per Max RSS.**  The green dashed line represents the 95% of total quanta, dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds. Only 0.3% of quanta exceed the 6GB threshold but these quanta account ~25% of the total wall-time. 
 ```
 
 When comparing cumulative plots between Stage 1 and Stage 3 (Figures 26 and 28), Stage 3 shows a slightly higher fraction of pipetasks exceeding 6 GB (0.07% vs. 0.006%). However, the majority of tasks still remain below the critical threshold, supporting the feasibility of a 6 GB per core allocation. Looking at the wall-time, the impact due to quanta exceeding the 6GB threshold is limited  to **0.5% of the total wall-time**. 
@@ -466,14 +468,14 @@ When comparing cumulative plots between Stage 1 and Stage 3 (Figures 26 and 28),
 ```{figure} ./images/MaxRSS_CDF_v30_stage3.png 
 :figclass: technote-wide-content
 
-**Cumulative fraction of Stage 3  quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. 
+**Cumulative fraction of Stage 3  quanta per Max RSS.**  The green dashed line represents the 95% of total quanta, dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds.
 ```
 Also for Stage 4, the cumulative plots confirm that reducing the memory allocation to 6 GB per core would be sufficient for more than 99 % of the pipetasks, even though the outliers that exceed the memory threshold account for **4 % of the total wall‑time** – a contribution that is not negligible.
 
 ```{figure} ./images/MaxRSS_CDF_v30_stage4.png 
 :figclass: technote-wide-content
 
-**Cumulative fraction of Stage 4 quanta per Max RSS.** The green dashed line represents the 95% of total quanta, and the dashed red line indicates the 6GB threshold. 
+**Cumulative fraction of Stage 4 quanta per Max RSS.** The green dashed line represents the 95% of total quanta, dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds.
 ```
 
 The following table presents the number of quanta exceeding the GB threshold for each campaign, indicating that:
