@@ -11,7 +11,7 @@ This technical note analyzes memory-usage patterns of `pipetask` during large-sc
 
 The purpose of this technical note is to study the memory usage patterns of `pipetask` to assess future RAM requirements for worker nodes. Currently, worker nodes are provisioned with 10 GB of memory per core for machines on `lsst` partition and 4GB of memory per core for machine on standard partition. Analyzing metrics from recent large-scale tests at CC-IN2P3 can provide valuable insight into whether reducing the memory per core to 6 GB would be both feasible and cost-effective.
 
-We analyzed memory-usage metrics collected by the Butler for four large-scale test campaigns at the French Data Facility (FrDF - CC-IN2P3):
+We analyzed memory-usage metrics collected by the Butler for five large-scale test campaigns at the French Data Facility (FrDF - CC-IN2P3):
 
 ```{rst-class} technote-wide-content
 ```
@@ -21,14 +21,16 @@ We analyzed memory-usage metrics collected by the Butler for four large-scale te
 | DM‑53719 | `v30.0.0.rc2`   | 1 061  | COSMOS, EDFS |
 | DM‑53877 | `v30.0.0.rc3`| 1 067  | COSMOS, EDFS |
 | DM‑54249 | `v30.0.4`      | 1 067  | COSMOS, EDFS |
-
-*DM‑53368* is a large‑scale test that suffered hardware failures, resulting in incomplete Stage 4 metrics. *DM‑53719* and *DM‑53877* are pilot runs for the upcoming DP2 production at USDF.
-*DM‑53877* encountered an issue with a pipetask and was terminated at step 4a.  
-
-All the campaigns described in the table above have been executed at CC-IN2P3. For this analysis, we will focus on the last campaign executed with `v30.0.4`, but we will provide a comparison of each campaign in the annexe.
+| DM‑54372 | `v30.0.4`      | 2038  | SV225 |
 
 The fields have been selected according to the campaign Management (CM) team's recommendations to cover regions that could pose challenges for data processing, or at least present more significant issues compared to a wide field.
 Details on the fields are available in offfcial LSST documentation ({cite}`RTN-011`,{cite}`RTN-111`).  
+
+*DM‑53368* is a large‑scale test that suffered hardware failures, resulting in incomplete Stage 4 metrics. *DM‑53719* and *DM‑53877* are pilot runs for the upcoming DP2 production at USDF.
+*DM‑53877* encountered an issue with a pipetask and was terminated at step 4a.  
+*DM‑54372* is a dense field and will be analyzed in the annex to compare its memory requirements with those of standard fields.
+
+All the campaigns described in the table above have been executed at CC-IN2P3. For this analysis, we will focus on the last campaign executed with `v30.0.4`, but we will provide a comparison of each campaign in the annex.
 
 The campaigns have been submitted from the CC-IN2P3 using BPS and Panda, with data from the `dp2_prep` butler as input. The input collection was created using the provided CM scripts and selecting the appropriate visits and exposures via ConsDB. 
 
@@ -478,7 +480,7 @@ Also for Stage 4, the cumulative plots confirm that reducing the memory alloca
 **Cumulative fraction of Stage 4 quanta per Max RSS.** The green dashed line represents the 95% of total quanta, dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds.
 ```
 
-The following table presents the number of quanta exceeding the GB threshold for each campaign, indicating that:
+The following table presents the number of quanta exceeding the GB threshold for DM‑54249 campaign, indicating that:
 
 * Stage 1: 6 GB per core is sufficient for 99.994 % of the quanta in terms of the number of jobs, and for 99.97 % of the quanta in terms of wall-time.
 * Stage 2: 6 GB per core is sufficient for 99.67 % of the quanta in terms of the number of jobs, and for 75 % of the quanta in terms of wall-time.
@@ -494,9 +496,106 @@ The following table presents the number of quanta exceeding the GB threshold for
 | Stage 3 |887,683   |637              |0.072           |25973.91           |123.53              |0.476              |
 | Stage 4 |2,593,783 |1,104            |0.043           |52124.19           |2,184.912           |4.192              |
 
-## Appendinx 
+## Annex
 
-### Comparison across stacks for Stage 1 pipetasks
+### Memory requirement for the dense field SV225
+
+
+The analysis of the metrics for the dense field clearly shows a memory demand that exceeds the requirements observed in the previously examined “standard” fields. This excess is visible at every stage of the pipeline, and the extra memory usage made it necessary to adjust the pipeline’s memory configuration in order to process the field in its entirety. In the following sections we will examine, stage by stage, the most problematic tasks
+
+#### Stage 1 pipetasks 
+
+In DM‑54372 Stage 1, **1,095,651** quanta were executed, and **1,880** of them exceeded the 6 GB threshold (0.18 %). In terms of wall‑time, the quanta that exceeded the 6 GB limit account for roughly **67 h** out of a total of **23,143 h** (0.3 %).
+If this figure looks acceptable, we should still note that the memory requirements are not negligible because two tasks, **`analyzeSingleVisitStarAssociation`** and **`associateIsolatedStar`**, consume far more memory than they did in the previous campaign as shown in the next table comparing main statistics for these two tasks. 
+
+
+```{rst-class} technote-wide-content
+``` 
+|                                                    |   max_rss_mean |   max_rss_median |   max_rss_min |   max_rss_max |   max_rss_95th_percentile | STACK         |
+|:---------------------------------------------------|---------------:|-----------------:|--------------:|--------------:|--------------------------:|:--------------|
+| analyzeSingleVisitStarAssociation                  |     118.055    |        83.6495   |      0.761913 |    307.428    |                303.947    | v30_0_4_SV225 |
+| analyzeSingleVisitStarAssociation                  |       7.602    |         4.24253  |      0.562172 |     23.7612   |                 23.6281   | v30_0_4       |
+| associateIsolatedStar                              |      24.3708   |        15.4813   |      0.966152 |    116.038    |                 77.878    | v30_0_4_SV225 |
+| associateIsolatedStar                              |       2.93676  |         2.98122  |      0.609653 |     11.0854   |                  6.13378  | v30_0_4       |
+
+
+```{figure} ./images/deep_MaxRSSTask_v30_stage1.png
+:figclass: technote-wide-content
+
+**Maximum RSS of Stage 1 pipeline tasks for dense and non‑dense fields** 
+Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds. The increase in memory usage is evident for the `analyzeSingleVisitStarAssociation` and `associateIsolatedStar` pipeline tasks.
+```
+Also looking at the integrated wall-time, as shown in the next figure, there are jobs using more than 250 GB of memeory for hours. 
+
+```{figure} ./images/deep_MaxRSS_stripplot_per_task_v30_upper6_stage1_walltime.png
+:figclass: technote-wide-content
+
+**DM-54372 Stage 1 Pipetask Runs Exceeding the 6 GB Memory Threshold – Frequency and Wall‑time Impact**
+The plot displays the number of runs (quanta) per Stage 1 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of the circle is proportional to the wall-time of the quanta, showing that the impact on the cores mobilised to handle the memory excess is important in particular for **`analyzeSingleVisitStarAssociation`** and **`associateIsolatedStar`**  pipetasks.
+```
+
+#### Stage 2 pipetasks  
+
+In the case of Stage 2, the situation is more complex: the number of tasks that on average exceed the 6 GB threshold is high both in terms of quanta (**288,912** out of a total of 1,071,583, **≈ 27 %**) and in terms of cumulative wall‑time (**50,123 h** out of a total of **60,984 h**, **≈ 82 %**).
+
+
+As shown in the following graph, many pipeline tasks executed in Stage 2 use, on average, more than 6 GB of memory.
+
+```{figure} ./images/deep_MaxRSS_box_all_stacks_stage2.png
+:figclass: technote-wide-content
+
+**Box plot showing maximum RSS for Stage 2 pipetasks in v30.0.4 release during DM-54372 SV_225 processing.**
+Orange and red dashed lines indicate the 4 GB and 6 GB memory thresholds. The x‑axis is logarithmic to improve the visualization. 
+Many tasks require > 6GB RSS.
+```
+
+Some of these pipeline tasks already exceeded the 6 GB threshold in the standard fields, but the overrun is now much larger, with peaks reaching 85 GB (`gbdesHealpix3AstrometricFit`) and 249 GB (`analyzeRecalibratedStarAssociation`) as shown in the next graph. 
+
+```{figure} ./images/deep_MaxRSSTask_v30_stage2.png
+:figclass: technote-wide-content
+
+**Maximum RSS of Stage 1 pipeline tasks for dense and non‑dense fields** 
+Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds. The increase in memory usage is evident for the `analyzeSingleVisitStarAssociation` and `associateIsolatedStar` pipeline tasks.
+```
+
+
+The table below shows a comparison of the statistics for the problematic tasks across the two campaigns.
+
+```{rst-class} technote-wide-content
+``` 
+
+|                                                     |   max_rss_mean |   max_rss_median |   max_rss_min |   max_rss_max |   max_rss_95th_percentile | STACK         |
+|:----------------------------------------------------|---------------:|-----------------:|--------------:|--------------:|--------------------------:|:--------------|
+| analyzeRecalibratedStarAssociation                  |      96.702    |        68.4145   |      0.490456 |    252.611    |                249.238    | v30_0_4_SV225 |
+| analyzeRecalibratedStarAssociation                  |       6.52842  |         3.60212  |      0.486923 |     19.7006   |                 19.4489   | v30_0_4       |
+| fgcmBuildFromIsolatedStar                           |      21.4124   |        21.4124   |     21.4124   |     21.4124   |                 21.4124   | v30_0_4_SV225 |
+| fgcmBuildFromIsolatedStar                           |      11.2081   |        11.2081   |     11.2081   |     11.2081   |                 11.2081   | v30_0_4       |
+| fgcmFitCycle                                        |      39.3765   |        39.3765   |     39.3765   |     39.3765   |                 39.3765   | v30_0_4_SV225 |
+| fgcmFitCycle                                        |      34.4069   |        34.4069   |     34.4069   |     34.4069   |                 34.4069   | v30_0_4       |
+| fgcmOutputProducts                                  |       8.33749  |         8.33749  |      8.33749  |      8.33749  |                  8.33749  | v30_0_4_SV225 |
+| fgcmOutputProducts                                  |       8.3409   |         8.3409   |      8.3409   |      8.3409   |                  8.3409   | v30_0_4       |
+| fitStellarMotion                                    |       2.46621  |         1.13275  |      0.500439 |     11.2468   |                  8.43619  | v30_0_4_SV225 |
+| fitStellarMotion                                    |       0.713758 |         0.656345 |      0.502529 |      1.43505  |                  1.09982  | v30_0_4       |
+| gaussianProcessesTurbulenceFit                      |      17.5902   |        18.1526   |      6.38021  |     26.4142   |                 26.2845   | v30_0_4_SV225 |
+| gaussianProcessesTurbulenceFit                      |       6.12501  |         6.2077   |      1.07148  |      6.54644  |                  6.51897  | v30_0_4       |
+| gbdesHealpix3AstrometricFit                         |      46.5806   |        42.5762   |      8.96418  |     87.3772   |                 85.7613   | v30_0_4_SV225 |
+| gbdesHealpix3AstrometricFit                         |       4.73779  |         3.74013  |      0.684643 |     12.0505   |                 11.3513   | v30_0_4       |
+| refitPsfModelDetector                               |       6.70917  |         6.79523  |      1.25986  |     10.8903   |                  8.33599  | v30_0_4_SV225 |
+| refitPsfModelDetector                               |       3.41789  |         3.56515  |      0.96085  |      4.92125  |                  4.36204  | v30_0_4       |
+
+
+As shown in the figure below—and as observed in the standard fields—the `gaussianProcessesTurbulenceFit` pipeline task consistently uses around 6 GB of memory for extended periods. In addition, the `gbdesHealpix3AstrometricFit` task now consumes up to **85 GB** for about **40 h**, and the `analyzeRecalibratedStarAssociation` task reaches **250 GB** for many hours.
+
+```{figure} ./images/deep_MaxRSS_stripplot_per_task_v30_upper6_stage2_walltime.png
+:figclass: technote-wide-content
+
+**DM-54372 Stage 2 Pipetask Runs Exceeding the 6 GB Memory Threshold – Frequency and Wall‑time Impact**
+The plot displays the number of runs (quanta) per Stage 2 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of each circle is proportional to the quanta’s wall‑time, illustrating that the impact on the cores required to handle the memory excess is now substantial for many tasks.
+```
+
+### Comparison across stacks 
+
+#### Stage 1 pipetasks
 
 ```{figure} ./images/MaxRSSTask_all_stacks_stage1.png
 :figclass: technote-wide-content
@@ -506,7 +605,7 @@ The box plot compares the maximum RSS of the Stage 1 pipetask across four softwa
 The orange and red dashed lines represent the 4GB and 6GB memory thresholds, respectively. The chart clearly demonstrates a significant improvement in memory usage from the older “weekly” stack to the v30 version. 
 ```
 
-### Comparison across stacks for Stage 2 pipetasks
+####  Stage 2 pipetasks
 
 ```{figure} ./images/MaxRSSTask_all_stacks_stage2.png
 :figclass: technote-wide-content
@@ -516,7 +615,7 @@ The box plot compares the maximum RSS of the Stage 2 pipetask across four softwa
 The orange and red dashed lines represent the 4GB and 6GB memory thresholds, respectively. The chart clearly demonstrates a significant improvement in memory usage from the older “weekly” stack to the v30 version. 
 ```
 
-### Comparison across stacks for Stage 3 pipetasks
+#### Stage 3 pipetasks
 
 ```{figure} ./images/MaxRSSTask_all_stacks_stage3.png
 :figclass: technote-wide-content
@@ -526,7 +625,7 @@ The box plot compares the maximum RSS of the Stage 3 pipetask across four softwa
 The orange and red dashed lines represent the 4GB and 6GB memory thresholds, respectively. The chart clearly demonstrates a significant improvement in memory usage from the older “weekly” stack to the v30 version. 
 ```
 
-### Comparison across stacks for Stage 4 pipetasks
+#### Stage 4 pipetasks
 
 ```{figure} ./images/MaxRSSTask_all_stacks_stage4.png
 :figclass: technote-wide-content
