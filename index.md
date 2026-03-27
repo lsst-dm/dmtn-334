@@ -593,6 +593,66 @@ As shown in the figure below—and as observed in the standard fields—the `gau
 The plot displays the number of runs (quanta) per Stage 2 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of each circle is proportional to the quanta’s wall‑time, illustrating that the impact on the cores required to handle the memory excess is now substantial for many tasks.
 ```
 
+
+
+#### Stage 3 pipetasks 
+
+Regarding Stage 3, the situation is better than in Stage 2, although, as with dense fields, the number of pipeline tasks and quanta that exceed the 6 GB threshold is higher than for non‑dense fields. For DM‑54372, a total of **2,182,659** quanta were executed; of these, **1,617** (0.07 %) exceeded the 6 GB limit, accounting for **1,074 h** of wall‑time out of a total of **76,739 h** (1.4 %).
+
+As shown in the graphs below, although some tasks display lower memory peaks when processing dense fields (notably `plopPropertyMapSurvey`, `consolidateObject`, etc.), an analysis of the 95th‑percentile memory usage shows that, overall, more memory was required to handle the dense field **Sv_225**.
+
+```{figure} ./images/deep_MaxRSSTask_v30_stage3.png
+:figclass: technote-wide-content
+
+**Maximum RSS of Stage 3 pipeline tasks for dense and non‑dense fields** 
+Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds. The increase in memory usage is evident for the `makeHealSparsePropertvMap` and `makeDeepCoaddinputSummaryTract` pipeline tasks.
+```
+
+
+```{figure} ./images/deep_95percTask_v30_stage3.png
+:figclass: technote-wide-content
+
+**95th‑percentile of max RSS of Stage 3 pipeline tasks for dense and non‑dense fields**
+The 95th‑percentile of the RSS values (95 % of pipetasks lie at or below this level). Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds.  The increase in memory usage is evident for the `makeHealSparsePropertvMap` and `makeDeepCoaddinputSummaryTract` pipeline tasks.
+```
+
+The table below shows a comparison of the statistics for the problematic tasks across the two campaigns.
+
+```{rst-class} technote-wide-content
+``` 
+|                                           |    max_rss_mean |   max_rss_median |   max_rss_min |   max_rss_max |   max_rss_95th_percentile | STACK         |
+|:------------------------------------------|----------------:|-----------------:|--------------:|--------------:|--------------------------:|:--------------|
+| analyzeObjectTableSurveyCore              |       10.172    |        10.172    |     10.172    |     10.172    |                 10.172    | v30_0_4_SV225 |
+| analyzeObjectTableSurveyCore              |        2.06782  |         2.06782  |      2.06782  |      2.06782  |                  2.06782  | v30_0_4       |
+| makeDeepCoaddInputSummaryTract            |        9.67026  |         3.43268  |      0.675789 |     62.9499   |                 39.0744   | v30_0_4_SV225 |
+| makeDeepCoaddInputSummaryTract            |        2.95651  |         0.954704 |      0.665157 |     17.955    |                 10.5732   | v30_0_4       |
+| makeHealSparsePropertyMaps                |       20.7522   |        15.017    |      1.04848  |     71.9303   |                 55.0528   | v30_0_4_SV225 |
+| makeHealSparsePropertyMaps                |        5.72563  |         4.59602  |      1.01052  |     17.6435   |                 14.9179   | v30_0_4       |
+| splitPrimaryObject                        |        8.0878   |         8.23914  |      0.644089 |     15.6442   |                 15.4146   | v30_0_4_SV225 |
+| splitPrimaryObject                        |        4.38222  |         1.9906   |      0.63155  |     17.4722   |                 13.1409   | v30_0_4       |
+
+As shown in the figure below, many pipetasks consistently use around 6 GB of memory for extended periods, up to 40 h.
+```{figure} ./images/deep_MaxRSS_stripplot_per_task_v30_upper6_stage3_walltime.png
+:figclass: technote-wide-content
+
+**DM-54372 Stage 3 Pipetask Runs Exceeding the 6 GB Memory Threshold – Frequency and Wall‑time Impact**
+The plot displays the number of runs (quanta) per Stage 3 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of each circle is proportional to the quanta’s wall‑time, illustrating that the impact on the cores required to handle the memory excess is now substantial for many tasks.
+```
+
+
+#### SV_225 processing conclusions
+
+The table below summarizes the results for the different stages, showing that, for Stage 2, processing a dense and deep field such as SV_225 may require a non‑negligible increase in memory resources, especially when the time needed for certain problematic pipetasks to finish is taken into account.
+
+```{rst-class} technote-wide-content
+```
+| Stage   | Quanta   | N. quanta > 6GB | % quanta > 6GB | Total Walltime (h)| Walltime (h) > 6GB |  % wall-time > 6GB |
+|--------:|---------:|----------------:|---------------:|------------------:| ------------------:| -----------------:|
+| Stage 1 |1,095,651 |1,880            |0.172           |23,142.842         |67.186              |0.29               |
+| Stage 2 |1,071,583 |288,912          |26.961          |60,984.435         |50123.035           |82.19              |
+| Stage 3 |2,182,659 |1,617            |0.074           |76,739.012         |1,073.987           |1.4                |
+| Stage 4 |TBD |TBD            |TBD           |TBD           |TBD          |TBD              |
+
 ### Comparison across stacks 
 
 #### Stage 1 pipetasks
