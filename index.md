@@ -555,7 +555,7 @@ Some of these pipeline tasks already exceeded the 6 GB threshold in the standa
 :figclass: technote-wide-content
 
 **Maximum RSS of Stage 1 pipeline tasks for dense and non‑dense fields** 
-Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds. The increase in memory usage is evident for the `analyzeSingleVisitStarAssociation` and `associateIsolatedStar` pipeline tasks.
+Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds. The increase in memory usage is evident for the `analyzeSingleVisitStarAssociation` and `associateIsolatedStar` pipetasks.
 ```
 
 
@@ -599,7 +599,7 @@ The plot displays the number of runs (quanta) per Stage 2 pipetask that exceed
 
 Regarding Stage 3, the situation is better than in Stage 2, although, as with dense fields, the number of pipeline tasks and quanta that exceed the 6 GB threshold is higher than for non‑dense fields. For DM‑54372, a total of **2,182,659** quanta were executed; of these, **1,617** (0.07 %) exceeded the 6 GB limit, accounting for **1,074 h** of wall‑time out of a total of **76,739 h** (1.4 %).
 
-As shown in the graphs below, although some tasks display lower memory peaks when processing dense fields (notably `plopPropertyMapSurvey`, `consolidateObject`, etc.), an analysis of the 95th‑percentile memory usage shows that, overall, more memory was required to handle the dense field **Sv_225**.
+As shown in the graphs below, although some tasks display lower memory peaks when processing dense fields (notably `plopPropertyMapSurvey`, `consolidateObject`, etc.), an analysis of the 95th‑percentile memory usage shows that, overall, more memory was required to handle the dense field **SV_225**.
 
 ```{figure} ./images/deep_MaxRSSTask_v30_stage3.png
 :figclass: technote-wide-content
@@ -613,10 +613,10 @@ Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds. Th
 :figclass: technote-wide-content
 
 **95th‑percentile of max RSS of Stage 3 pipeline tasks for dense and non‑dense fields**
-The 95th‑percentile of the RSS values (95 % of pipetasks lie at or below this level). Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds.  The increase in memory usage is evident for the `makeHealSparsePropertvMap` and `makeDeepCoaddinputSummaryTract` pipeline tasks.
+The 95th‑percentile of the RSS values (95 % of pipetasks lie at or below this level). Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds.  The increase in memory usage is evident for the `makeHealSparsePropertvMap` and `makeDeepCoaddinputSummaryTract` pipetasks.
 ```
 
-The table below shows a comparison of the statistics for the problematic tasks across the two campaigns.
+The table below shows a comparison of the statistics for the problematic Stage 3 tasks across the two campaigns.
 
 ```{rst-class} technote-wide-content
 ``` 
@@ -638,11 +638,70 @@ As shown in the figure below, many pipetasks consistently use around 6 GB of
 **DM-54372 Stage 3 Pipetask Runs Exceeding the 6 GB Memory Threshold – Frequency and Wall‑time Impact**
 The plot displays the number of runs (quanta) per Stage 3 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of each circle is proportional to the quanta’s wall‑time, illustrating that the impact on the cores required to handle the memory excess is now substantial for many tasks.
 ```
+#### Stage 4 pipetasks 
 
+
+Even for the Stage 4 pipetasks we see a significant increase in memory usage, with **peaks reaching 450 GB** for `analyzeSourceAssociation`. 
+For this stage we executed  6,425,437 quanta, of these 42,119 exceeded the 6GB limit (~ 0.7%) accounting for **15,386 h** of wall‑time out of a total of **178,482 h** (8.62%). 
+
+As shown in the graphs below, the 95th‑percentile memory‑usage analysis reveals that the dense field **SV_225** consistently required more RAM, especially for the `analyseSourceAssociation`, `consolidateDiaSource`, and `associateAnalysisSource` pipeline tasks.
+```{figure} ./images/deep_MaxRSSTask_v30_stage4.png
+:figclass: technote-wide-content
+
+**Maximum RSS of Stage 3 pipeline tasks for dense and non‑dense fields** 
+Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds. The increase in memory usage is evident for the `analyseSourceAssociation`, `consolidateDiaSource`, and `associateAnalysisSOurce` pipeline tasks.
+```
+
+
+```{figure} ./images/deep_95percTask_v30_stage4.png
+:figclass: technote-wide-content
+
+**95th‑percentile of max RSS of Stage 4 pipeline tasks for dense and non‑dense fields**
+The 95th‑percentile of the RSS values (95 % of pipetasks lie at or below this level). Dashed orange and red lines indicate the 4 GB and 6 GB memory thresholds.  The increase in memory usage is evident for the `analyseSourceAssociation`, `consolidateDiaSource`, and `associateAnalysisSOurce` pipetasks.
+```
+The table below shows a comparison of the statistics for the problematic  Stage 4 tasks across the two campaigns.
+
+```{rst-class} technote-wide-content
+``` 
+|                                           |   max_rss_mean |   max_rss_median |   max_rss_min |   max_rss_max |   max_rss_95th_percentile | STACK         |
+|:------------------------------------------|---------------:|-----------------:|--------------:|--------------:|--------------------------:|:--------------|
+| analyzeDiaSourceTableTract                |       3.40835  |         1.76696  |      1.33379  |     11.8671   |                  9.75785  | v30_0_4_SV225 |
+| analyzeDiaSourceTableTract                |       0.928535 |         0.882538 |      0.873363 |      1.26305  |                  1.21465  | v30_0_4       |
+| analyzeRecalibratedStarObjectMatch        |       6.06886  |         6.10214  |      5.55774  |      6.25974  |                  6.19345  | v30_0_4_SV225 |
+| analyzeRecalibratedStarObjectMatch        |       1.55229  |         1.67764  |      0.998528 |      1.78778  |                  1.73491  | v30_0_4       |
+| analyzeSourceAssociation                  |     206.595    |       156.755    |      2.40981  |    456.986    |                451.934    | v30_0_4_SV225 |
+| analyzeSourceAssociation                  |      17.9633   |         5.24598  |      1.0643   |     52.3885   |                 52.3016   | v30_0_4       |
+| associateAnalysisSource                   |      44.1646   |        48.9917   |      1.7278   |    115.159    |                 90.4585   | v30_0_4_SV225 |
+| associateAnalysisSource                   |       6.26791  |         2.9582   |      1.3198   |     16.5839   |                 14.6256   | v30_0_4       |
+| consolidateDiaSource                      |       9.99923  |         4.06018  |      1.33514  |     43.3943   |                 34.9344   | v30_0_4_SV225 |
+| consolidateDiaSource                      |       1.12855  |         0.882492 |      0.872929 |      2.60363  |                  2.36882  | v30_0_4       |
+| standardizeDiaObjectForcedSource          |       3.07845  |         1.45218  |      1.32604  |     14.9025   |                 10.0145   | v30_0_4_SV225 |
+| standardizeDiaObjectForcedSource          |       1.00443  |         0.885902 |      0.874744 |      2.47455  |                  1.5126   | v30_0_4       |
+| standardizeObjectForcedSource             |       2.70103  |         1.9294   |      1.32792  |      7.47769  |                  6.34357  | v30_0_4_SV225 |
+| standardizeObjectForcedSource             |       1.38892  |         0.885784 |      0.87326  |      3.62589  |                  3.37692  | v30_0_4       |
+| standardizeSource                         |       3.57195  |         3.28986  |      1.82681  |      8.84628  |                  5.66682  | v30_0_4_SV225 |
+| standardizeSource                         |       1.82974  |         1.79422  |      1.12519  |      3.61885  |                  2.10644  | v30_0_4       |
+
+
+The problematic tasks are also time‑consuming, as shown in the figure below, which forces the allocation of additional CPU resources to meet the higher memory demands.
+
+```{figure} ./images/deep_MaxRSS_stripplot_per_task_v30_upper6_stage4_walltime.png
+:figclass: technote-wide-content
+
+**DM-54372 Stage 4 Pipetask Runs Exceeding the 6 GB Memory Threshold – Frequency and Wall‑time Impact**
+The plot displays the number of runs (quanta) per Stage 3 pipetask that exceed the 6 GB memory threshold (dashed red line). Each circle marks the frequency (i.e., the number of quanta) at which a given task reaches a specific memory level. The size of each circle is proportional to the quanta’s wall‑time, illustrating that the impact on the cores required to handle the memory excess is now substantial for many tasks.
+```
 
 #### SV_225 processing conclusions
 
 The table below summarizes the results for the different stages, showing that, for Stage 2, processing a dense and deep field such as SV_225 may require a non‑negligible increase in memory resources, especially when the time needed for certain problematic pipetasks to finish is taken into account.
+Also for Stage 4 the memmory increase is not negligeable also in terms of integrated walltime.
+
+The table below summarises the results for the different stages.
+1. **Stage 1** - The increase in memory required by the two tasks `analyzeSingleVisitStarAssociation` and `associateIsolatedStar` is significant, but it has little impact on the integrated wall‑time.
+2. **Stage 2** – This stage is the most problematic: in fact, processing a dense, deep field such as **SV_225** can lead to a non‑negligible increase in memory consumption, coupled with a very high wall‑time, which mobilises a large amount of CPU to satisfy the higher memory demands. 
+3. **Stage 3** – For this stage we also observe an increase in the memory required by the pipeline tasks, but the impact on the integrated wall‑time is considerably smaller than what we see in **Stage 2**.
+4. **Stage 4** – For this stage we encounter the same problem observed in **Stage 2**, but its impact on the integrated wall‑time is smaller because the jobs run for a shorter time.
 
 ```{rst-class} technote-wide-content
 ```
@@ -651,7 +710,7 @@ The table below summarizes the results for the different stages, showing that, f
 | Stage 1 |1,095,651 |1,880            |0.172           |23,142.842         |67.186              |0.29               |
 | Stage 2 |1,071,583 |288,912          |26.961          |60,984.435         |50123.035           |82.19              |
 | Stage 3 |2,182,659 |1,617            |0.074           |76,739.012         |1,073.987           |1.4                |
-| Stage 4 |TBD |TBD            |TBD           |TBD           |TBD          |TBD              |
+| Stage 4 |6,425,437 |42,119           |0.656           |178,482.496        |15,385.953          |8.62               |
 
 ### Comparison across stacks 
 
